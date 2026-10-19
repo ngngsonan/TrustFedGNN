@@ -1,11 +1,11 @@
 # Codebase guide
 
-This document describes the implemented research system. It is independent of any paper, journal, table number, or submission narrative. Source code is authoritative when it differs from this guide.
+This document describes the implemented research system. Source code is authoritative when it differs from this guide. The aggregator called FU-Alignment in the article is `fu_shapley` in the code.
 
 ## System map
 
 ```text
-FedFairGNN/
+TrustFedGNN/
 ├── src/
 │   ├── config.py                 serialisable ExperimentConfig and canonical preset
 │   ├── data/                     dataset loaders, graph partitions, server holdout, sampler
@@ -14,24 +14,13 @@ FedFairGNN/
 │   ├── trust/                    FU-Alignment, privacy accounting, diagnostics
 │   └── utils/                    metrics, logging, provenance
 ├── experiments/
-│   ├── methods.py                method presets
-│   ├── campaigns/           historical campaign registry C01-C25 and verifier
-│   ├── revision/                 focused audit and robustness studies
+│   ├── campaigns/                registry, runners, verifier, statistics, table generator
+│   ├── revision/                 runners reused by C05, C20b/c and C21
 │   └── colab/                    provenance-preserving Colab packaging
-├── results/campaigns/       immutable JSON artifacts and campaign status records
+├── results/campaigns/            immutable JSON artifacts and campaign status records
 ├── tests/                         executable invariants
-└── docs/                          venue-neutral technical reference
+└── docs/                          technical reference and the claim ledger
 ```
-
-The directory name `campaigns` is retained for artifact compatibility. It is a historical namespace, not a dependency on a venue. Renaming it would break stored paths and status hashes without changing the research.
-
-Legacy modules `src/models/trustfedgnn.py`, `src/federated/server.py`, `src/federated/baselines.py`, `src/models/baselines.py`, and `src/utils/data_utils.py` are not imported by registered campaigns. Verify this before deleting them:
-
-```bash
-rg -n "models\.trustfedgnn|federated\.(server|baselines)|models\.baselines|utils\.data_utils" src experiments tests
-```
-
-Target: Local. Expected result: references are confined to legacy or compatibility checks; any new production import requires revising this statement.
 
 ## Execution path
 
@@ -77,7 +66,7 @@ print(ExperimentConfig.canonical().to_dict())
 PY
 ```
 
-Target: Local, G14, or Colab after setup.
+Target: any machine with the pinned requirements.
 
 ## TrustFedGNN components
 
@@ -105,7 +94,7 @@ The exact branches are in `src/trust/incentive.py::compute_fu_weights` and the `
 
 ## Data and evaluation contracts
 
-Supported loader names are defined in `src/data/datasets.py`; registered studies use German Credit, Bail, Credit Default, Pokec-z, and synthetic test graphs. Large-graph runs can enable the dependency-free neighbour sampler in `src/data/sampler.py`.
+Supported loader names are defined in `src/data/datasets.py`; the article uses German Credit, Bail and Pokec-z. Large-graph runs can enable the dependency-free neighbour sampler in `src/data/sampler.py`.
 
 Primary endpoint fields are:
 
@@ -134,10 +123,9 @@ Status and artifact have different roles:
 ## Test surface
 
 ```bash
-source ../.venv-local/bin/activate
 python -m pytest -q tests -m 'not slow'
 python -m experiments.campaigns.run_campaign --list
-python -m experiments.campaigns.verify --ids C20 C21 C22 C23 C23b C24 C25
+python -m experiments.campaigns.verify
 ```
 
-Target: Local for the first two commands. The selected verifier is CPU-only and may run on Local or G14. It reads existing artifacts and does not retrain models. See `REPRODUCIBILITY.md` before launching any campaign.
+The verifier is CPU-only. It reads existing artifacts and does not retrain models. See `REPRODUCIBILITY.md` before launching any campaign.

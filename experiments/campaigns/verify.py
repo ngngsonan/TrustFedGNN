@@ -366,7 +366,7 @@ def chk_C26(d, r):
     r.check("German and Bail each contain paired seeds 42..71", not bad, bad)
 
     c23_path = os.path.join(REPO, OUT, "C23_mechanism_factorial.json")
-    r.check("paired C23 reference exists", os.path.exists(c23_path), c23_path)
+    r.check("paired C23 reference exists", os.path.exists(c23_path), os.path.relpath(c23_path, REPO))
     if os.path.exists(c23_path):
         with open(c23_path) as f:
             c23 = json.load(f)["results"]
@@ -395,7 +395,7 @@ def verify(cid: str, smoke: bool) -> Report:
     status_path = os.path.join(REPO, OUT, "status", f"{tag}.json")
     outputs = c.smoke_outputs if smoke else c.outputs
     if not os.path.exists(status_path):
-        r.check("status file exists", False, status_path)
+        r.check("status file exists", False, os.path.relpath(status_path, REPO))
         return r
     with open(status_path) as f:
         status = json.load(f)

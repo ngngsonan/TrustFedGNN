@@ -65,6 +65,32 @@ def c24_active_round_summary(c24: dict) -> Dict:
     return out
 
 
+C05_RULES = ("fedavg", "krum", "multikrum", "flame", "bfwa", "fu_shapley")
+
+
+def c05_summary(c05: dict) -> Dict:
+    """Supporting stealth-poisoning sweep (Bail, K=10, R=15, E=1): mean w_adv per rule and
+    corruption ratio, and FU-Alignment minus FedAvg paired by seed, Holm across the four
+    ratios within each metric."""
+    recs = c05["records"]
+    ratios = sorted({r["byz_ratio"] for r in recs})
+    out: Dict = {"w_adv_mean": {}, "fu_minus_fedavg": {}}
+    for rule in C05_RULES:
+        out["w_adv_mean"][rule] = {str(q): float(np.mean([r["w_adv"] for r in recs
+                                                          if r["aggregator"] == rule and r["byz_ratio"] == q]))
+                                   for q in ratios}
+    for metric in ("w_adv", "auc", "dpd_hard"):
+        res = {}
+        for q in ratios:
+            fu = [r for r in recs if r["aggregator"] == "fu_shapley" and r["byz_ratio"] == q]
+            fa = [r for r in recs if r["aggregator"] == "fedavg" and r["byz_ratio"] == q]
+            res[str(q)] = paired(fu, fa, metric)
+        for r_, adj in zip(res.values(), holm([x["wilcoxon_p"] for x in res.values()])):
+            r_["holm_p_across_4"] = adj
+        out["fu_minus_fedavg"][metric] = res
+    return out
+
+
 def paired(left: list, right: list, metric: str, seed: int = 0) -> dict:
     a = {x["seed"]: x for x in left}
     b = {x["seed"]: x for x in right}
@@ -135,6 +161,7 @@ def main() -> None:
         result["holm_p_across_8"] = adjusted
 
     output["c24_active_rounds"] = c24_active_round_summary(load("C24_adaptive_access.json"))
+    output["c05"] = c05_summary(load("C05_adaptive_poisoner.json"))
 
     out_path = os.path.join(RESULTS, "analysis", "discover_ai.json")
     os.makedirs(os.path.dirname(out_path), exist_ok=True)

@@ -1,5 +1,1823 @@
 [
  {
+  "id": "C05",
+  "verdict": "PASS",
+  "checks": [
+   {
+    "check": "run state == done",
+    "ok": true,
+    "detail": "done"
+   },
+   {
+    "check": "exists: results/campaigns/C05_adaptive_poisoner.json",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "sha256 matches status: results/campaigns/C05_adaptive_poisoner.json",
+    "ok": true,
+    "detail": "artifact changed after the run"
+   },
+   {
+    "check": "manifests on one commit == run commit: results/campaigns/C05_adaptive_poisoner.json",
+    "ok": true,
+    "detail": "['a8e046f78875a75ace4a034ee7b1ddd22767dc3d']"
+   },
+   {
+    "check": "no git_dirty manifest: results/campaigns/C05_adaptive_poisoner.json",
+    "ok": true,
+    "detail": "0"
+   },
+   {
+    "check": "11 rules x 4 ratios x seeds 42..51",
+    "ok": true,
+    "detail": "440"
+   },
+   {
+    "check": "FLTrust fu_alpha=0.0",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "protocol R=15, E=1 recorded",
+    "ok": true,
+    "detail": ""
+   }
+  ],
+  "summary": {
+   "cells": {
+    "fedavg@0.1": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.686609,
+      "std": 0.013603
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.023145,
+      "std": 0.009719
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.125048,
+      "std": 0.088187
+     }
+    },
+    "fedavg@0.2": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.687392,
+      "std": 0.010636
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.01477,
+      "std": 0.00964
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.246694,
+      "std": 0.113735
+     }
+    },
+    "fedavg@0.3": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.683435,
+      "std": 0.00966
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.025613,
+      "std": 0.021168
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.353624,
+      "std": 0.10872
+     }
+    },
+    "fedavg@0.4": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.680915,
+      "std": 0.008989
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.019872,
+      "std": 0.012465
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.471636,
+      "std": 0.077814
+     }
+    },
+    "krum@0.1": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.61994,
+      "std": 0.028712
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.07609,
+      "std": 0.024578
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.946667,
+      "std": 0.146734
+     }
+    },
+    "krum@0.2": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.608486,
+      "std": 0.016951
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.096756,
+      "std": 0.023383
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "krum@0.3": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.631714,
+      "std": 0.016606
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.086124,
+      "std": 0.033834
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "krum@0.4": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.60741,
+      "std": 0.021401
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.090609,
+      "std": 0.038658
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 1.0,
+      "std": 0.0
+     }
+    },
+    "multikrum@0.1": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.683107,
+      "std": 0.010102
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.025098,
+      "std": 0.013568
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.111111,
+      "std": 0.0
+     }
+    },
+    "multikrum@0.2": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.676501,
+      "std": 0.008363
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.020798,
+      "std": 0.016243
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.25,
+      "std": 0.0
+     }
+    },
+    "multikrum@0.3": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.676565,
+      "std": 0.012253
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.019756,
+      "std": 0.018658
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.428571,
+      "std": 0.0
+     }
+    },
+    "multikrum@0.4": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.662454,
+      "std": 0.009585
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.048369,
+      "std": 0.02212
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.661111,
+      "std": 0.014103
+     }
+    },
+    "median@0.1": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.671999,
+      "std": 0.016428
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.024886,
+      "std": 0.014853
+     },
+     "w_adv": {
+      "n": 0,
+      "n_nan": 10,
+      "mean": null,
+      "std": null
+     }
+    },
+    "median@0.2": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.66572,
+      "std": 0.019891
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.015829,
+      "std": 0.012533
+     },
+     "w_adv": {
+      "n": 0,
+      "n_nan": 10,
+      "mean": null,
+      "std": null
+     }
+    },
+    "median@0.3": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.673569,
+      "std": 0.014231
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.01821,
+      "std": 0.014805
+     },
+     "w_adv": {
+      "n": 0,
+      "n_nan": 10,
+      "mean": null,
+      "std": null
+     }
+    },
+    "median@0.4": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.664393,
+      "std": 0.012106
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.032791,
+      "std": 0.026333
+     },
+     "w_adv": {
+      "n": 0,
+      "n_nan": 10,
+      "mean": null,
+      "std": null
+     }
+    },
+    "trimmed_mean@0.1": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.683127,
+      "std": 0.008336
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.026369,
+      "std": 0.01374
+     },
+     "w_adv": {
+      "n": 0,
+      "n_nan": 10,
+      "mean": null,
+      "std": null
+     }
+    },
+    "trimmed_mean@0.2": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.687987,
+      "std": 0.008636
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.020113,
+      "std": 0.011847
+     },
+     "w_adv": {
+      "n": 0,
+      "n_nan": 10,
+      "mean": null,
+      "std": null
+     }
+    },
+    "trimmed_mean@0.3": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.684924,
+      "std": 0.011116
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.019709,
+      "std": 0.01369
+     },
+     "w_adv": {
+      "n": 0,
+      "n_nan": 10,
+      "mean": null,
+      "std": null
+     }
+    },
+    "trimmed_mean@0.4": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.677123,
+      "std": 0.011405
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.030962,
+      "std": 0.01787
+     },
+     "w_adv": {
+      "n": 0,
+      "n_nan": 10,
+      "mean": null,
+      "std": null
+     }
+    },
+    "flame@0.1": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.682557,
+      "std": 0.009059
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.015122,
+      "std": 0.010041
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.102397,
+      "std": 0.001289
+     }
+    },
+    "flame@0.2": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.676425,
+      "std": 0.011256
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.02412,
+      "std": 0.017314
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.205958,
+      "std": 0.002828
+     }
+    },
+    "flame@0.3": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.677521,
+      "std": 0.011789
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.029398,
+      "std": 0.018152
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.309135,
+      "std": 0.008131
+     }
+    },
+    "flame@0.4": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.66871,
+      "std": 0.01359
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.030192,
+      "std": 0.028161
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.409767,
+      "std": 0.00815
+     }
+    },
+    "bfwa@0.1": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.648459,
+      "std": 0.020147
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.045987,
+      "std": 0.028333
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.846952,
+      "std": 0.0
+     }
+    },
+    "bfwa@0.2": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.639183,
+      "std": 0.021886
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.053361,
+      "std": 0.03129
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.863958,
+      "std": 0.0
+     }
+    },
+    "bfwa@0.3": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.645887,
+      "std": 0.022372
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.060137,
+      "std": 0.021719
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.880963,
+      "std": 0.0
+     }
+    },
+    "bfwa@0.4": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.630613,
+      "std": 0.025512
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.0667,
+      "std": 0.027104
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.897968,
+      "std": 0.0
+     }
+    },
+    "robust_bfwa@0.1": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.646557,
+      "std": 0.018965
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.046049,
+      "std": 0.027985
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.848562,
+      "std": 0.0
+     }
+    },
+    "robust_bfwa@0.2": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.626792,
+      "std": 0.023296
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.068436,
+      "std": 0.030795
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.871928,
+      "std": 0.0
+     }
+    },
+    "robust_bfwa@0.3": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.63982,
+      "std": 0.014193
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.068474,
+      "std": 0.027422
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.902129,
+      "std": 0.0
+     }
+    },
+    "robust_bfwa@0.4": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.621794,
+      "std": 0.02187
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.08718,
+      "std": 0.031627
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.94268,
+      "std": 0.0
+     }
+    },
+    "fltrust@0.1": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.638656,
+      "std": 0.016851
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.024128,
+      "std": 0.018228
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.094251,
+      "std": 0.058397
+     }
+    },
+    "fltrust@0.2": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.639048,
+      "std": 0.014507
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.025189,
+      "std": 0.011838
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.178568,
+      "std": 0.090321
+     }
+    },
+    "fltrust@0.3": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.638152,
+      "std": 0.014953
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.024553,
+      "std": 0.019018
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.339413,
+      "std": 0.116222
+     }
+    },
+    "fltrust@0.4": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.633785,
+      "std": 0.015248
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.029437,
+      "std": 0.020216
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.401463,
+      "std": 0.088978
+     }
+    },
+    "fu_shapley@0.1": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.683846,
+      "std": 0.009352
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.020502,
+      "std": 0.01156
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.069173,
+      "std": 0.016506
+     }
+    },
+    "fu_shapley@0.2": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.680235,
+      "std": 0.00817
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.021194,
+      "std": 0.01485
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.136698,
+      "std": 0.023241
+     }
+    },
+    "fu_shapley@0.3": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.679927,
+      "std": 0.007454
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.015353,
+      "std": 0.008468
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.212123,
+      "std": 0.030013
+     }
+    },
+    "fu_shapley@0.4": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.674047,
+      "std": 0.008069
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.028371,
+      "std": 0.012371
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.291823,
+      "std": 0.047517
+     }
+    },
+    "robust_fu_shapley@0.1": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.683937,
+      "std": 0.012688
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.023351,
+      "std": 0.013854
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.075366,
+      "std": 0.017785
+     }
+    },
+    "robust_fu_shapley@0.2": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.682253,
+      "std": 0.012353
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.021379,
+      "std": 0.011807
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.174414,
+      "std": 0.025262
+     }
+    },
+    "robust_fu_shapley@0.3": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.672422,
+      "std": 0.015351
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.026326,
+      "std": 0.019782
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.316564,
+      "std": 0.031763
+     }
+    },
+    "robust_fu_shapley@0.4": {
+     "auc": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.663594,
+      "std": 0.015264
+     },
+     "dpd_hard": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.024983,
+      "std": 0.024878
+     },
+     "w_adv": {
+      "n": 10,
+      "n_nan": 0,
+      "mean": 0.535516,
+      "std": 0.044466
+     }
+    }
+   },
+   "wall_clock_min": 171.87,
+   "device": {
+    "cuda_available": false,
+    "host": null
+   }
+  }
+ },
+ {
+  "id": "C20",
+  "verdict": "PASS",
+  "checks": [
+   {
+    "check": "run state == done",
+    "ok": true,
+    "detail": "done"
+   },
+   {
+    "check": "exists: results/campaigns/C20b_audit_german.json",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "sha256 matches status: results/campaigns/C20b_audit_german.json",
+    "ok": true,
+    "detail": "artifact changed after the run"
+   },
+   {
+    "check": "manifests on one commit == run commit: results/campaigns/C20b_audit_german.json",
+    "ok": true,
+    "detail": "['80556abffe824f3a989afb1e3f1954b3357deaac']"
+   },
+   {
+    "check": "no git_dirty manifest: results/campaigns/C20b_audit_german.json",
+    "ok": true,
+    "detail": "0"
+   },
+   {
+    "check": "exists: results/campaigns/C20c_audit_bail.json",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "sha256 matches status: results/campaigns/C20c_audit_bail.json",
+    "ok": true,
+    "detail": "artifact changed after the run"
+   },
+   {
+    "check": "manifests on one commit == run commit: results/campaigns/C20c_audit_bail.json",
+    "ok": true,
+    "detail": "['80556abffe824f3a989afb1e3f1954b3357deaac']"
+   },
+   {
+    "check": "no git_dirty manifest: results/campaigns/C20c_audit_bail.json",
+    "ok": true,
+    "detail": "0"
+   },
+   {
+    "check": "C20 produced 2 artifacts",
+    "ok": true,
+    "detail": "2"
+   },
+   {
+    "check": "C20 audit german has qffl_eq and fltrust_root",
+    "ok": true,
+    "detail": "['qffl_eq', 'fltrust_root']"
+   },
+   {
+    "check": "C20 audit german qffl_eq has 3 arms",
+    "ok": true,
+    "detail": "['clean', 'poison_honest', 'poison_lie']"
+   },
+   {
+    "check": "C20 audit german fltrust_root has 3 arms",
+    "ok": true,
+    "detail": "['clean', 'poison_honest', 'poison_lie']"
+   },
+   {
+    "check": "C20 audit german root-FLTrust invariant end to end",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C20 audit bail has qffl_eq and fltrust_root",
+    "ok": true,
+    "detail": "['qffl_eq', 'fltrust_root']"
+   },
+   {
+    "check": "C20 audit bail qffl_eq has 3 arms",
+    "ok": true,
+    "detail": "['clean', 'poison_honest', 'poison_lie']"
+   },
+   {
+    "check": "C20 audit bail fltrust_root has 3 arms",
+    "ok": true,
+    "detail": "['clean', 'poison_honest', 'poison_lie']"
+   },
+   {
+    "check": "C20 audit bail root-FLTrust invariant end to end",
+    "ok": true,
+    "detail": ""
+   }
+  ],
+  "summary": {
+   "wall_clock_min": 47.5,
+   "device": {
+    "cuda_available": false,
+    "host": null
+   }
+  }
+ },
+ {
+  "id": "C20r",
+  "verdict": "PASS",
+  "checks": [
+   {
+    "check": "run state == done",
+    "ok": true,
+    "detail": "done"
+   },
+   {
+    "check": "exists: results/campaigns/C20r_fixed_state_replay.json",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "sha256 matches status: results/campaigns/C20r_fixed_state_replay.json",
+    "ok": true,
+    "detail": "artifact changed after the run"
+   },
+   {
+    "check": "manifests on one commit == run commit: results/campaigns/C20r_fixed_state_replay.json",
+    "ok": true,
+    "detail": "['671ca8cd192a7f86db73988ee66a110833d6d790']"
+   },
+   {
+    "check": "no git_dirty manifest: results/campaigns/C20r_fixed_state_replay.json",
+    "ok": true,
+    "detail": "0"
+   },
+   {
+    "check": "C20r has 30 seeds",
+    "ok": true,
+    "detail": "[42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71]"
+   },
+   {
+    "check": "C20r rounds == 20",
+    "ok": true,
+    "detail": "20"
+   },
+   {
+    "check": "C20r records the union-lie protocol",
+    "ok": true,
+    "detail": "BEST_RESPONSE_LIE for report-reading rules; union_lie (n kept honest) for all others"
+   },
+   {
+    "check": "C20r links the superseded C20a",
+    "ok": true,
+    "detail": "{'artifact': 'results/campaigns/C20a_fixed_state_replay.json', 'sha256': '4ca1e97653e1f888ca3337cd60f7af47b3b40db2100f16e5a8cc1a0c58ee0948', 'reason': 'C20a injected no falsified report for rules outside BEST_RESPONSE_LIE and did not seed each run'}"
+   },
+   {
+    "check": "C20r covers 12 rules",
+    "ok": true,
+    "detail": "['bfwa', 'cgsv', 'f2gnn', 'fairfed', 'fedgraphfair', 'fltrust', 'fltrust_root', 'fu_shapley', 'fu_shapley_alpha0', 'popets_fairfed', 'qffl', 'qffl_eq']"
+   },
+   {
+    "check": "C20r bfwa has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C20r cgsv has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C20r f2gnn has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C20r fairfed has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C20r fedgraphfair has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C20r fltrust has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C20r fltrust_root has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C20r fu_shapley has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C20r fu_shapley_alpha0 has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C20r popets_fairfed has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C20r qffl has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C20r qffl_eq has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   }
+  ],
+  "summary": {
+   "bfwa": {
+    "mean_d": 0.6497223651471238,
+    "n_nonzero": 25,
+    "n_positive": 25,
+    "elapsed_s": 26.5
+   },
+   "cgsv": {
+    "mean_d": 0.0,
+    "n_nonzero": 0,
+    "n_positive": 0,
+    "elapsed_s": 25.96
+   },
+   "f2gnn": {
+    "mean_d": 0.9083523452140921,
+    "n_nonzero": 30,
+    "n_positive": 30,
+    "elapsed_s": 24.45
+   },
+   "fairfed": {
+    "mean_d": 0.1684087093546987,
+    "n_nonzero": 30,
+    "n_positive": 30,
+    "elapsed_s": 25.09
+   },
+   "fedgraphfair": {
+    "mean_d": 0.039491083479175966,
+    "n_nonzero": 26,
+    "n_positive": 26,
+    "elapsed_s": 25.99
+   },
+   "fltrust": {
+    "mean_d": 0.0,
+    "n_nonzero": 0,
+    "n_positive": 0,
+    "elapsed_s": 27.18
+   },
+   "fltrust_root": {
+    "mean_d": 0.0,
+    "n_nonzero": 0,
+    "n_positive": 0,
+    "elapsed_s": 28.34
+   },
+   "fu_shapley": {
+    "mean_d": 0.0,
+    "n_nonzero": 0,
+    "n_positive": 0,
+    "elapsed_s": 27.37
+   },
+   "fu_shapley_alpha0": {
+    "mean_d": 0.0,
+    "n_nonzero": 0,
+    "n_positive": 0,
+    "elapsed_s": 27.27
+   },
+   "popets_fairfed": {
+    "mean_d": 0.008024358715241155,
+    "n_nonzero": 30,
+    "n_positive": 29,
+    "elapsed_s": 27.43
+   },
+   "qffl": {
+    "mean_d": NaN,
+    "n_nonzero": 25,
+    "n_positive": 25,
+    "elapsed_s": 24.18
+   },
+   "qffl_eq": {
+    "mean_d": 0.3050960952043533,
+    "n_nonzero": 30,
+    "n_positive": 30,
+    "elapsed_s": 26.13
+   },
+   "wall_clock_min": 5.32,
+   "device": {
+    "cuda_available": false,
+    "host": null
+   }
+  }
+ },
+ {
+  "id": "C21",
+  "verdict": "PASS",
+  "checks": [
+   {
+    "check": "run state == done",
+    "ok": true,
+    "detail": "done"
+   },
+   {
+    "check": "exists: results/campaigns/C21a_bfwa_slack_vector.json",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "sha256 matches status: results/campaigns/C21a_bfwa_slack_vector.json",
+    "ok": true,
+    "detail": "artifact changed after the run"
+   },
+   {
+    "check": "manifests on one commit == run commit: results/campaigns/C21a_bfwa_slack_vector.json",
+    "ok": true,
+    "detail": "['18c551e0a9e090a495e1527dc188067b2b12a3c3']"
+   },
+   {
+    "check": "no git_dirty manifest: results/campaigns/C21a_bfwa_slack_vector.json",
+    "ok": true,
+    "detail": "0"
+   },
+   {
+    "check": "exists: results/campaigns/C21_privacy_contract.json",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "sha256 matches status: results/campaigns/C21_privacy_contract.json",
+    "ok": true,
+    "detail": "artifact changed after the run"
+   },
+   {
+    "check": "manifests on one commit == run commit: results/campaigns/C21_privacy_contract.json",
+    "ok": true,
+    "detail": "['18c551e0a9e090a495e1527dc188067b2b12a3c3']"
+   },
+   {
+    "check": "no git_dirty manifest: results/campaigns/C21_privacy_contract.json",
+    "ok": true,
+    "detail": "0"
+   },
+   {
+    "check": "C21 produced 2 artifacts",
+    "ok": true,
+    "detail": "2"
+   },
+   {
+    "check": "C21a covers 7 epsilons",
+    "ok": true,
+    "detail": "{'8.0', '2.0', '32.0', '16.0', '1.0', '0.5', '4.0'}"
+   },
+   {
+    "check": "C21a eps=8.0 has 200 rounds",
+    "ok": true,
+    "detail": "200"
+   },
+   {
+    "check": "C21a eps=8.0 client_vectors recorded (K=10)",
+    "ok": true,
+    "detail": "10"
+   },
+   {
+    "check": "C21a eps=4.0 has 200 rounds",
+    "ok": true,
+    "detail": "200"
+   },
+   {
+    "check": "C21a eps=4.0 client_vectors recorded (K=10)",
+    "ok": true,
+    "detail": "10"
+   },
+   {
+    "check": "C21a eps=2.0 has 200 rounds",
+    "ok": true,
+    "detail": "200"
+   },
+   {
+    "check": "C21a eps=2.0 client_vectors recorded (K=10)",
+    "ok": true,
+    "detail": "10"
+   },
+   {
+    "check": "C21a eps=32.0 has 200 rounds",
+    "ok": true,
+    "detail": "200"
+   },
+   {
+    "check": "C21a eps=32.0 client_vectors recorded (K=10)",
+    "ok": true,
+    "detail": "10"
+   },
+   {
+    "check": "C21a eps=16.0 has 200 rounds",
+    "ok": true,
+    "detail": "200"
+   },
+   {
+    "check": "C21a eps=16.0 client_vectors recorded (K=10)",
+    "ok": true,
+    "detail": "10"
+   },
+   {
+    "check": "C21a eps=0.5 has 200 rounds",
+    "ok": true,
+    "detail": "200"
+   },
+   {
+    "check": "C21a eps=0.5 client_vectors recorded (K=10)",
+    "ok": true,
+    "detail": "10"
+   },
+   {
+    "check": "C21a eps=1.0 has 200 rounds",
+    "ok": true,
+    "detail": "200"
+   },
+   {
+    "check": "C21a eps=1.0 client_vectors recorded (K=10)",
+    "ok": true,
+    "detail": "10"
+   },
+   {
+    "check": "C21 contract covers 7 epsilons",
+    "ok": true,
+    "detail": "{'8.0', '2.0', '32.0', '16.0', '1.0', '0.5', '4.0'}"
+   }
+  ],
+  "summary": {
+   "R_het_mean": {
+    "0.5": 0.4922513909437879,
+    "1.0": 0.4853138134974573,
+    "2.0": 0.4723559305872939,
+    "4.0": 0.44867808299888795,
+    "8.0": 0.40684027995671956,
+    "16.0": 0.33610023497599817,
+    "32.0": 0.22216240307120466
+   },
+   "R_equal_mean": {
+    "0.5": 0.49359944036644476,
+    "1.0": 0.48812827644053836,
+    "2.0": 0.4770421474583135,
+    "4.0": 0.4567689350783024,
+    "8.0": 0.42357332661040475,
+    "16.0": 0.3658945542072651,
+    "32.0": 0.27893641277440073
+   },
+   "wall_clock_min": 11.81,
+   "device": {
+    "cuda_available": false,
+    "host": null
+   }
+  }
+ },
+ {
+  "id": "C22",
+  "verdict": "PASS",
+  "checks": [
+   {
+    "check": "run state == done",
+    "ok": true,
+    "detail": "done"
+   },
+   {
+    "check": "exists: results/campaigns/C22_guardfed_matched.json",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "sha256 matches status: results/campaigns/C22_guardfed_matched.json",
+    "ok": true,
+    "detail": "artifact changed after the run"
+   },
+   {
+    "check": "manifests on one commit == run commit: results/campaigns/C22_guardfed_matched.json",
+    "ok": true,
+    "detail": "['a9cfaee19685c7034a17444a1ed9caa729e6e65c']"
+   },
+   {
+    "check": "no git_dirty manifest: results/campaigns/C22_guardfed_matched.json",
+    "ok": true,
+    "detail": "0"
+   },
+   {
+    "check": "C22 has selection for 3 scenarios",
+    "ok": true,
+    "detail": "['A-German', 'A-Bail', 'B-Bail']"
+   },
+   {
+    "check": "C22 has tune for 3 scenarios",
+    "ok": true,
+    "detail": "['A-German', 'A-Bail', 'B-Bail']"
+   },
+   {
+    "check": "C22 confirm part_a has german and bail",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C22 confirm part_a german non-empty",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C22 confirm part_a bail non-empty",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C22 confirm part_b non-empty",
+    "ok": true,
+    "detail": "40"
+   },
+   {
+    "check": "C22 fltrust_root_stealth non-empty",
+    "ok": true,
+    "detail": "40"
+   }
+  ],
+  "summary": {
+   "selected_configs": {
+    "A-German": "gs_tau1_gam0.03",
+    "A-Bail": "gs_tau1_gam0.0",
+    "B-Bail": "gs_tau10_gam0.001"
+   },
+   "german_auc_mean": 0.6661688888888889,
+   "german_dpd_mean": 0.08982906315760181,
+   "german_w_adv_mean": 0.014722222238779068,
+   "bail_auc_mean": 0.6926703174887426,
+   "bail_dpd_mean": 0.02186358679401854,
+   "bail_w_adv_mean": 0.08763888957599796,
+   "wall_clock_min": 114.87,
+   "device": {
+    "cuda_available": false,
+    "host": null
+   }
+  }
+ },
+ {
+  "id": "C23",
+  "verdict": "PASS",
+  "checks": [
+   {
+    "check": "run state == done",
+    "ok": true,
+    "detail": "done"
+   },
+   {
+    "check": "exists: results/campaigns/C23_mechanism_factorial.json",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "sha256 matches status: results/campaigns/C23_mechanism_factorial.json",
+    "ok": true,
+    "detail": "artifact changed after the run"
+   },
+   {
+    "check": "manifests on one commit == run commit: results/campaigns/C23_mechanism_factorial.json",
+    "ok": true,
+    "detail": "['c9fa82487436b33feae7109dc2f2855ac799fbb1']"
+   },
+   {
+    "check": "no git_dirty manifest: results/campaigns/C23_mechanism_factorial.json",
+    "ok": true,
+    "detail": "0"
+   },
+   {
+    "check": "C23 covers german and bail",
+    "ok": true,
+    "detail": "['german', 'bail']"
+   },
+   {
+    "check": "C23 german has fairness_poison and clean",
+    "ok": true,
+    "detail": "['fairness_poison', 'clean']"
+   },
+   {
+    "check": "C23 german fairness_poison has arms",
+    "ok": true,
+    "detail": "['F_SR_C', 'F_SR_R', 'F_RS_C', 'F_RS_R', 'A4_fu_shapley', 'A1_fltrust', 'A5_fltrust_ema', 'R1_fltrust_root', 'A0_fedavg']"
+   },
+   {
+    "check": "C23 german clean has arms",
+    "ok": true,
+    "detail": "['A0_fedavg', 'A4_fu_shapley', 'R1_fltrust_root']"
+   },
+   {
+    "check": "C23 german has per_round records",
+    "ok": true,
+    "detail": "20"
+   },
+   {
+    "check": "C23 bail has fairness_poison and clean",
+    "ok": true,
+    "detail": "['fairness_poison', 'clean']"
+   },
+   {
+    "check": "C23 bail fairness_poison has arms",
+    "ok": true,
+    "detail": "['F_SR_C', 'F_SR_R', 'F_RS_C', 'F_RS_R', 'A4_fu_shapley', 'A1_fltrust', 'A5_fltrust_ema', 'R1_fltrust_root', 'A0_fedavg']"
+   },
+   {
+    "check": "C23 bail clean has arms",
+    "ok": true,
+    "detail": "['A0_fedavg', 'A4_fu_shapley', 'R1_fltrust_root']"
+   },
+   {
+    "check": "C23 bail has per_round records",
+    "ok": true,
+    "detail": "20"
+   }
+  ],
+  "summary": {
+   "german_poison": {
+    "F_SR_C": 0.07449340894197425,
+    "F_SR_R": 0.15738661312439947,
+    "F_RS_C": 0.11521508477492413,
+    "F_RS_R": 0.18574688913657858,
+    "A4_fu_shapley": 0.06299435845615033,
+    "A1_fltrust": 0.2565234487138999,
+    "A5_fltrust_ema": 0.18674385953288342,
+    "R1_fltrust_root": 0.18923291243612764,
+    "A0_fedavg": 0.16493333367009957
+   },
+   "bail_poison": {
+    "F_SR_C": 0.046160516151576306,
+    "F_SR_R": 0.0800220994749543,
+    "F_RS_C": 0.07769483415565145,
+    "F_RS_R": 0.0974695196377191,
+    "A4_fu_shapley": 0.04512458312397939,
+    "A1_fltrust": 0.16429208271515866,
+    "A5_fltrust_ema": 0.09562902913157206,
+    "R1_fltrust_root": 0.19590358397496554,
+    "A0_fedavg": 0.19391467111806074
+   },
+   "wall_clock_min": 235.35,
+   "device": {
+    "cuda_available": false,
+    "host": null
+   }
+  }
+ },
+ {
+  "id": "C23b",
+  "verdict": "PASS",
+  "checks": [
+   {
+    "check": "run state == done",
+    "ok": true,
+    "detail": "done"
+   },
+   {
+    "check": "exists: results/campaigns/C23b_mechanism_subset.json",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "sha256 matches status: results/campaigns/C23b_mechanism_subset.json",
+    "ok": true,
+    "detail": "artifact changed after the run"
+   },
+   {
+    "check": "manifests on one commit == run commit: results/campaigns/C23b_mechanism_subset.json",
+    "ok": true,
+    "detail": "['c696a4f0aabab0f54958ba14283b3459d2bb335d']"
+   },
+   {
+    "check": "no git_dirty manifest: results/campaigns/C23b_mechanism_subset.json",
+    "ok": true,
+    "detail": "0"
+   },
+   {
+    "check": "C23b covers german and bail",
+    "ok": true,
+    "detail": "['german', 'bail']"
+   },
+   {
+    "check": "C23b german has fairness_poison",
+    "ok": true,
+    "detail": "['fairness_poison']"
+   },
+   {
+    "check": "C23b german has all 4 expected arms",
+    "ok": true,
+    "detail": "['A4_fu_shapley', 'R1_fltrust_root', 'A1_fltrust', 'A5_fltrust_ema']"
+   },
+   {
+    "check": "C23b german A4_fu_shapley has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b german A4_fu_shapley seeds are 42..71",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b german A4_fu_shapley all 30 records have exactly 20 rounds",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b german A4_fu_shapley all rounds have finite mechanism metrics",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b german A1_fltrust has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b german A1_fltrust seeds are 42..71",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b german A1_fltrust all 30 records have exactly 20 rounds",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b german A1_fltrust all rounds have finite mechanism metrics",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b german R1_fltrust_root has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b german R1_fltrust_root seeds are 42..71",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b german R1_fltrust_root all 30 records have exactly 20 rounds",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b german R1_fltrust_root all rounds have finite mechanism metrics",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b german A5_fltrust_ema has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b german A5_fltrust_ema seeds are 42..71",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b german A5_fltrust_ema all 30 records have exactly 20 rounds",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b german A5_fltrust_ema all rounds have finite mechanism metrics",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b bail has fairness_poison",
+    "ok": true,
+    "detail": "['fairness_poison']"
+   },
+   {
+    "check": "C23b bail has all 4 expected arms",
+    "ok": true,
+    "detail": "['A4_fu_shapley', 'R1_fltrust_root', 'A1_fltrust', 'A5_fltrust_ema']"
+   },
+   {
+    "check": "C23b bail A4_fu_shapley has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b bail A4_fu_shapley seeds are 42..71",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b bail A4_fu_shapley all 30 records have exactly 20 rounds",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b bail A4_fu_shapley all rounds have finite mechanism metrics",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b bail A1_fltrust has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b bail A1_fltrust seeds are 42..71",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b bail A1_fltrust all 30 records have exactly 20 rounds",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b bail A1_fltrust all rounds have finite mechanism metrics",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b bail R1_fltrust_root has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b bail R1_fltrust_root seeds are 42..71",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b bail R1_fltrust_root all 30 records have exactly 20 rounds",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b bail R1_fltrust_root all rounds have finite mechanism metrics",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b bail A5_fltrust_ema has 30 seeds",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b bail A5_fltrust_ema seeds are 42..71",
+    "ok": true,
+    "detail": "30"
+   },
+   {
+    "check": "C23b bail A5_fltrust_ema all 30 records have exactly 20 rounds",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C23b bail A5_fltrust_ema all rounds have finite mechanism metrics",
+    "ok": true,
+    "detail": ""
+   }
+  ],
+  "summary": {
+   "german_poison": {
+    "A4_fu_shapley": 0.06299435845615033,
+    "R1_fltrust_root": 0.18923291243612764,
+    "A1_fltrust": 0.2565234487138999,
+    "A5_fltrust_ema": 0.18674385953288342
+   },
+   "bail_poison": {
+    "A4_fu_shapley": 0.04512458312397939,
+    "R1_fltrust_root": 0.19590358397496554,
+    "A1_fltrust": 0.16429208271515866,
+    "A5_fltrust_ema": 0.09562902913157206
+   },
+   "wall_clock_min": 96.61,
+   "device": {
+    "cuda_available": false,
+    "host": null
+   }
+  }
+ },
+ {
   "id": "C25",
   "verdict": "PASS",
   "checks": [
@@ -103,6 +1921,641 @@
    "wall_clock_min": 160.19,
    "device": {
     "cuda_available": true,
+    "host": null
+   }
+  }
+ },
+ {
+  "id": "C24",
+  "verdict": "PASS",
+  "checks": [
+   {
+    "check": "run state == done",
+    "ok": true,
+    "detail": "done"
+   },
+   {
+    "check": "exists: results/campaigns/C24_adaptive_access.json",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "sha256 matches status: results/campaigns/C24_adaptive_access.json",
+    "ok": true,
+    "detail": "artifact changed after the run"
+   },
+   {
+    "check": "manifests on one commit == run commit: results/campaigns/C24_adaptive_access.json",
+    "ok": true,
+    "detail": "['cf8442212236633628b58cc85ecd964993347a26']"
+   },
+   {
+    "check": "no git_dirty manifest: results/campaigns/C24_adaptive_access.json",
+    "ok": true,
+    "detail": "0"
+   },
+   {
+    "check": "C24 covers german and bail",
+    "ok": true,
+    "detail": "['german', 'bail']"
+   },
+   {
+    "check": "C24 german has S3 and benign",
+    "ok": true,
+    "detail": "['benign', 'S1', 'S2', 'S3']"
+   },
+   {
+    "check": "C24 german benign has 4 methods",
+    "ok": true,
+    "detail": "['fedavg', 'fltrust_root', 'fu_shapley', 'guardfed_style']"
+   },
+   {
+    "check": "C24 german benign fedavg has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german benign fedavg metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german benign fedavg benign w_adv and I_adv are zero",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german benign fltrust_root has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german benign fltrust_root metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german benign fltrust_root benign w_adv and I_adv are zero",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german benign fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german benign fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german benign fu_shapley benign w_adv and I_adv are zero",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german benign guardfed_style has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german benign guardfed_style metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german benign guardfed_style benign w_adv and I_adv are zero",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S1 has 4 methods",
+    "ok": true,
+    "detail": "['fedavg', 'fltrust_root', 'fu_shapley', 'guardfed_style']"
+   },
+   {
+    "check": "C24 german S1 fedavg has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S1 fedavg metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S1 fltrust_root has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S1 fltrust_root metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S1 fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S1 fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S1 guardfed_style has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S1 guardfed_style metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S2 has 4 methods",
+    "ok": true,
+    "detail": "['fedavg', 'fltrust_root', 'fu_shapley', 'guardfed_style']"
+   },
+   {
+    "check": "C24 german S2 fedavg has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S2 fedavg metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S2 fltrust_root has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S2 fltrust_root metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S2 fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S2 fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S2 guardfed_style has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S2 guardfed_style metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S3 has 4 methods",
+    "ok": true,
+    "detail": "['fedavg', 'fltrust_root', 'fu_shapley', 'guardfed_style']"
+   },
+   {
+    "check": "C24 german S3 fedavg has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S3 fedavg metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S3 fltrust_root has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S3 fltrust_root metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S3 fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S3 fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S3 guardfed_style has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S3 guardfed_style metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail has S3 and benign",
+    "ok": true,
+    "detail": "['benign', 'S1', 'S2', 'S3']"
+   },
+   {
+    "check": "C24 bail benign has 4 methods",
+    "ok": true,
+    "detail": "['fedavg', 'fltrust_root', 'fu_shapley', 'guardfed_style']"
+   },
+   {
+    "check": "C24 bail benign fedavg has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail benign fedavg metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail benign fedavg benign w_adv and I_adv are zero",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail benign fltrust_root has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail benign fltrust_root metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail benign fltrust_root benign w_adv and I_adv are zero",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail benign fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail benign fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail benign fu_shapley benign w_adv and I_adv are zero",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail benign guardfed_style has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail benign guardfed_style metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail benign guardfed_style benign w_adv and I_adv are zero",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S1 has 4 methods",
+    "ok": true,
+    "detail": "['fedavg', 'fltrust_root', 'fu_shapley', 'guardfed_style']"
+   },
+   {
+    "check": "C24 bail S1 fedavg has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S1 fedavg metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S1 fltrust_root has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S1 fltrust_root metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S1 fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S1 fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S1 guardfed_style has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S1 guardfed_style metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S2 has 4 methods",
+    "ok": true,
+    "detail": "['fedavg', 'fltrust_root', 'fu_shapley', 'guardfed_style']"
+   },
+   {
+    "check": "C24 bail S2 fedavg has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S2 fedavg metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S2 fltrust_root has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S2 fltrust_root metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S2 fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S2 fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S2 guardfed_style has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S2 guardfed_style metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S3 has 4 methods",
+    "ok": true,
+    "detail": "['fedavg', 'fltrust_root', 'fu_shapley', 'guardfed_style']"
+   },
+   {
+    "check": "C24 bail S3 fedavg has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S3 fedavg metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S3 fltrust_root has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S3 fltrust_root metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S3 fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S3 fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S3 guardfed_style has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S3 guardfed_style metrics finite",
+    "ok": true,
+    "detail": ""
+   }
+  ],
+  "summary": {
+   "datasets": [
+    "german",
+    "bail"
+   ],
+   "schedules": [
+    "S1",
+    "S2",
+    "S3",
+    "benign"
+   ],
+   "methods": [
+    "fedavg",
+    "fltrust_root",
+    "fu_shapley",
+    "guardfed_style"
+   ],
+   "wall_clock_min": 140.4738053085166,
+   "device": {
+    "cuda_available": false,
+    "host": null
+   }
+  }
+ },
+ {
+  "id": "C26",
+  "verdict": "PASS",
+  "checks": [
+   {
+    "check": "run state == done",
+    "ok": true,
+    "detail": "done"
+   },
+   {
+    "check": "exists: results/campaigns/C26_fu_alpha0.json",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "sha256 matches status: results/campaigns/C26_fu_alpha0.json",
+    "ok": true,
+    "detail": "artifact changed after the run"
+   },
+   {
+    "check": "manifests on one commit == run commit: results/campaigns/C26_fu_alpha0.json",
+    "ok": true,
+    "detail": "['d2e2e5c25c9ed6407b9e730bfdb5c46194203088']"
+   },
+   {
+    "check": "no git_dirty manifest: results/campaigns/C26_fu_alpha0.json",
+    "ok": true,
+    "detail": "0"
+   },
+   {
+    "check": "German and Bail each contain paired seeds 42..71",
+    "ok": true,
+    "detail": "{}"
+   },
+   {
+    "check": "paired C23 reference exists",
+    "ok": true,
+    "detail": "results/campaigns/C23_mechanism_factorial.json"
+   },
+   {
+    "check": "german: alpha=0 and alpha=0.1 have identical paired seeds",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "bail: alpha=0 and alpha=0.1 have identical paired seeds",
+    "ok": true,
+    "detail": ""
+   }
+  ],
+  "summary": {
+   "german": {
+    "alpha0": {
+     "auc": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.636653,
+      "std": 0.05781
+     },
+     "dpd_hard": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.072947,
+      "std": 0.05069
+     },
+     "eod": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.073462,
+      "std": 0.060303
+     },
+     "w_adv": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.065667,
+      "std": 0.067753
+     }
+    },
+    "alpha01": {
+     "auc": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.641402,
+      "std": 0.051943
+     },
+     "dpd_hard": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.071998,
+      "std": 0.051065
+     },
+     "eod": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.068812,
+      "std": 0.062527
+     },
+     "w_adv": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.062994,
+      "std": 0.067103
+     }
+    }
+   },
+   "bail": {
+    "alpha0": {
+     "auc": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.724213,
+      "std": 0.045316
+     },
+     "dpd_hard": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.019526,
+      "std": 0.014938
+     },
+     "eod": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.033252,
+      "std": 0.022115
+     },
+     "w_adv": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.044021,
+      "std": 0.05413
+     }
+    },
+    "alpha01": {
+     "auc": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.723406,
+      "std": 0.044717
+     },
+     "dpd_hard": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.01968,
+      "std": 0.015158
+     },
+     "eod": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.036095,
+      "std": 0.023306
+     },
+     "w_adv": {
+      "n": 30,
+      "n_nan": 0,
+      "mean": 0.045125,
+      "std": 0.053921
+     }
+    }
+   },
+   "wall_clock_min": 26.0,
+   "device": {
+    "cuda_available": false,
     "host": null
    }
   }

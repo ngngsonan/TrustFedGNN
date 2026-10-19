@@ -1,97 +1,61 @@
-# Reproducibility operations
+# Reproducibility
 
-This runbook separates cheap integrity checks from training. Never regenerate an artifact merely to update prose.
+This runbook separates cheap integrity checks, which read the stored artifacts, from re-running a campaign, which retrains models.
 
-## Before any run
-
-```bash
-# Local only, from the repository root
-source ../.venv-local/bin/activate
-
-git status --short
-git rev-parse HEAD
-python -m experiments.campaigns.run_campaign --list
-python -m pytest -q tests -m 'not slow'
-```
-
-Target: Local. A full campaign requires a clean non-results tree. Record the intended campaign, expected commit, target, seed set, and output path before dispatch.
-
-## Local checks and smoke runs
+## 1. Check the stored evidence (no training)
 
 ```bash
-# Read-only verifier; does not train
-python -m experiments.campaigns.verify --ids C20 C21 C22 C23 C23b C24 C25
-
-# Cheap pipeline smoke test; use only when the registry supplies a smoke variant
-python -m experiments.campaigns.run_campaign --id C20 --smoke --allow-dirty
+pip install -r requirements.txt
+python -m experiments.campaigns.verify                 # every campaign that has a status file
+python -m experiments.campaigns.analyze_discover_ai    # results/campaigns/analysis/discover_ai.json
+python -m experiments.campaigns.make_tables --check    # regenerate every table and diff with manuscript/tables
+pytest -m "not slow"
 ```
 
-Target: Local. Smoke artifacts live under `results/campaigns/smoke/` and cannot replace full-run evidence.
+`verify` writes `results/campaigns/verification_report.{json,md}`. For each campaign it checks that:
 
-## Full CPU campaign on G14
+1. `status/<ID>.json` records `state: done`;
+2. every declared output exists and matches the SHA-256 recorded at run time;
+3. every manifest inside the artifact carries the status commit with `git_dirty: false`;
+4. the design is complete (datasets × arms × seeds) and the protocol invariants hold;
+5. the summary statistics recompute from the per-seed records.
 
-Run these from the workspace root `/Users/anson/DS/Research`:
+## 2. Re-run a campaign
 
 ```bash
-python3 .agents/scripts/g14_runner.py sync-to \
-  1_Paper/01.GNN/02.TrustFedGNN/FedFairGNN/ \
-  --dest 02.TrustFedGNN/FedFairGNN
-
-python3 .agents/scripts/g14_runner.py run \
-  "RERUN_EXPECTED_COMMIT=<FULL_COMMIT> python -m experiments.campaigns.run_campaign --id <CAMPAIGN> --threads 8" \
-  --name <task_name> --env fedfairgnn --cwd 02.TrustFedGNN/FedFairGNN
-
-python3 .agents/scripts/g14_runner.py status --name <task_name>
-
-python3 .agents/scripts/g14_runner.py fetch \
-  02.TrustFedGNN/FedFairGNN/results/campaigns/ \
-  1_Paper/01.GNN/02.TrustFedGNN/FedFairGNN/results/campaigns/
+python -m experiments.campaigns.run_campaign --list            # IDs, commands, runtime estimates
+python -m experiments.campaigns.run_campaign --id C20r --smoke --allow-dirty   # cheap variant, same code path
+python -m experiments.campaigns.run_campaign --id C20r         # full run; refuses a dirty tree
+python -m experiments.campaigns.verify --ids C20r
 ```
 
-Target: G14. Replace every placeholder explicitly. After fetching, run the named verifier locally and compare artifact SHA-256 with the fetched status record. The sync helper excludes `.git`, so provenance must remain attributable through the expected commit/environment contract; inspect the resulting embedded manifest before accepting the artifact.
+A full run records the commit, the command lines, the exit codes and the output hashes in `results/campaigns/status/<ID>.json`, and its log in `results/campaigns/logs/`. An existing output produced by another commit is moved aside, never overwritten. Smoke artifacts live in `results/campaigns/smoke/` and are not evidence.
 
-## Full GPU campaign on Colab
+## 3. Environment of each campaign
 
-The supported flow is implemented by `experiments/colab/00_pack.sh`, `01_setup.py`, and `experiments/campaigns/colab_{launch,poll,collect}.py`.
+Client partitions are drawn with torch's random number generator. The same seed can therefore give a different split under a different torch version, and a re-run is expected to reproduce a campaign's conclusions but not its exact numbers unless the environment matches. Each manifest records its platform and torch version. Comparisons in the article are made only within a campaign, where every rule shares the environment and the seeds.
 
-```bash
-# Local: package a clean committed tree
-SP=<STAGING_DIR> bash experiments/colab/00_pack.sh
+| Campaign | Study in the article | Environment |
+|---|---|---|
+| C20r | fixed-update report audit | macOS arm64, CPU, torch 2.14.0 |
+| C20 (C20b/c) | end-to-end audit (root-FLTrust invariance) | macOS arm64, CPU, torch 2.14.0 |
+| C21 | report-privacy diagnostic (SI) | macOS arm64, CPU, torch 2.14.0 |
+| C22 | GuardFed-style tuning (SI) | macOS arm64, CPU, torch 2.14.0 |
+| C23, C23b, C26 | controlled fairness poisoning, logged replay, α = 0 | macOS arm64, CPU, torch 2.14.0 |
+| C24 | adaptive access | Linux x86-64, CPU, torch 2.5.1 |
+| C25 | Pokec-z known-label control | preflight: macOS CPU; control: Colab T4 GPU, torch 2.11.0 |
+| C05 | supporting stealth sweep (SI) | macOS arm64, CPU, torch 2.14.0 |
 
-# Colab: after upload/setup, queue one campaign ID per line and launch
-python3 experiments/campaigns/colab_launch.py
+GPU results are numerically reproducible, not bit-exact.
 
-# Local/Colab control path: poll, collect, then verify the collected campaign
-python3 -m experiments.campaigns.verify --ids <CAMPAIGN>
-```
+## 4. Known limitations of the stored artifacts
 
-Target: packaging and final verification on Local; training on Colab. The package step records commit and tarball SHA-256 and excludes raw data, results, manuscripts, internal docs, and caches. Preserve `manifest_local.json` with collected outputs.
+These are documented rather than fixed by a re-run, because they do not affect a reported number. Each is handled where it matters.
 
-## Acceptance checklist
-
-For each campaign:
-
-1. `status/<ID>.json` has `state: done` and zero exit codes.
-2. Every declared output exists and matches the status SHA-256.
-3. Artifact manifests agree with the status commit and record `git_dirty: false`.
-4. The verifier passes design completeness and protocol invariants for that ID.
-5. Any quoted statistic is recomputed from per-seed records with its direction and uncertainty defined.
-6. GPU results are treated as numerically reproducible, not bit-exact, unless an explicit bit-exact test proves otherwise.
-
-Verification:
-
-```bash
-python -m experiments.campaigns.verify --ids <CAMPAIGN>
-python -m json.tool results/campaigns/status/<CAMPAIGN>.json
-shasum -a 256 results/campaigns/<ARTIFACT>.json
-```
-
-Target: Local or G14. The verifier writes `verification_report.json` and `.md`; record the exact ID list because it defines the report's scope.
-
-## Cost control
-
-- Use Local for reading, artifact analysis, verifier runs, and smoke tests expected under two minutes.
-- Use G14 for CPU training, multi-seed studies, grid searches, or checks expected over two minutes.
-- Use Colab only for campaigns registered as `gpu-colab` or for a documented GPU requirement.
-- Do not launch a new experiment when an existing immutable artifact already answers the question.
-- Do not alter an artifact by hand. Change code, commit, rerun into a new artifact, then verify.
+- **C24, reference evasion × FedAvg.** The adversaries' report omitted the sample count `n`, which FedAvg reads (`aggregate` defaults it to 1). These 20 runs are excluded from every table and claim (`analyze_discover_ai.py::C24_INVALID_CELLS`). The other three methods do not read `n` (`tests/test_campaigns.py`). The runner has since been fixed.
+- **C24 round indexing.** Stored rounds are 1-indexed, while the schedules are defined on the 0-indexed round of the trainer; `active_poison_round` converts between them (`tests/test_campaigns.py::test_c24_active_round_boundary`).
+- **C23 `I_adv` field.** It was written before the mechanism logger was fixed and holds the adversarial weight; the article takes processed influence from C23b and C24 only.
+- **C20 (C20b/c), q-FFL-eq arm.** Its updates are about 10⁻³ of root-FLTrust's and its clean AUC is near chance (0.54 German, 0.51 Bail). The arm is not used as evidence; only the root-FLTrust invariance of this campaign is cited.
+- **C25 control.** The manifest does not store the label protocol. The registry passes `--pokec-label-protocol known_only` to `experiments/colab/run_revision_gpu.py`, which forwards it to `ExperimentConfig`; the preflight records 2,566 known-label test nodes.
+- **C21.** The decision residual is measured on a fresh noise draw from each client's post-training model, not on the release that BFWA consumed.
+- **C26** reproduces, bit for bit, the `A3_fu_alpha0` arm of an earlier development campaign (C07), which is not part of this repository.

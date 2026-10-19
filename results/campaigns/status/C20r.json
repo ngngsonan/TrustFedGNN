@@ -1,0 +1,42 @@
+{
+  "id": "C20r",
+  "title": "Fixed-update report audit, re-run with a falsified report for every rule and per-run seeding",
+  "smoke": false,
+  "state": "done",
+  "started": "2026-10-19T16:55:52+00:00",
+  "provenance": {
+    "commit": "671ca8cd192a7f86db73988ee66a110833d6d790",
+    "dirty": false,
+    "source": "git",
+    "dirty_files": []
+  },
+  "platform": "macOS-15.7.9-arm64-arm-64bit",
+  "python": "3.12.12",
+  "cuda_available": false,
+  "threads": null,
+  "env_overrides": {},
+  "cmds": [
+    [
+      "python",
+      "experiments/campaigns/c20_fixed_state_replay.py",
+      "--workers",
+      "6",
+      "--rounds",
+      "20",
+      "--out-json",
+      "results/campaigns/C20r_fixed_state_replay.json"
+    ]
+  ],
+  "append_args": null,
+  "exit_codes": [
+    0
+  ],
+  "outputs": {
+    "results/campaigns/C20r_fixed_state_replay.json": {
+      "sha256": "229f456d43eea1eaabeda585b7e83d76b41144291e8c50240fa7033acc90d475",
+      "bytes": 7296096
+    }
+  },
+  "wall_clock_min": 5.32,
+  "finished": "2026-10-19T17:01:12+00:00"
+}

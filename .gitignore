@@ -250,9 +250,6 @@ out.tgz
 # Scratch directories
 scratch/
 
-# Internal research documents (journal reviews, audits, rebuttal strategy).
-# The repo is linked from the manuscript; keep these out of version control (docs/DECISIONS.md ADR-18).
-docs/internal/
 
 /data/
 manuscript*/*.fls
