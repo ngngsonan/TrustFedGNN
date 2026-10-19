@@ -1,0 +1,39 @@
+{
+  "id": "C26",
+  "title": "FU-Alignment fairness-reference isolation (alpha=0, German and Bail, 30 seeds)",
+  "smoke": false,
+  "state": "done",
+  "started": "2026-10-19T13:14:42+00:00",
+  "provenance": {
+    "commit": "d2e2e5c25c9ed6407b9e730bfdb5c46194203088",
+    "dirty": false,
+    "source": "git",
+    "dirty_files": []
+  },
+  "platform": "macOS-15.7.9-arm64-arm-64bit",
+  "cuda_available": false,
+  "threads": 1,
+  "env_overrides": {},
+  "cmds": [
+    [
+      "python",
+      "experiments/campaigns/c26_fu_alpha0.py",
+      "--workers",
+      "6",
+      "--out-json",
+      "results/campaigns/C26_fu_alpha0.json"
+    ]
+  ],
+  "append_args": null,
+  "exit_codes": [
+    0
+  ],
+  "outputs": {
+    "results/campaigns/C26_fu_alpha0.json": {
+      "sha256": "53de1021acafe6132ed48093be574f7f7989c3301a004b8289ad783787040769",
+      "bytes": 1210459
+    }
+  },
+  "wall_clock_min": 26.0,
+  "finished": "2026-10-19T13:40:43+00:00"
+}

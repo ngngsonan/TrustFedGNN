@@ -1,0 +1,15 @@
+# Exact versions of the environment that produced the CPU artifacts (macOS arm64,
+# Python 3.12.12). Partitions are drawn with torch's RNG, so a different torch
+# version can produce different client splits for the same seed; see
+# docs/REPRODUCIBILITY.md for the environment of each campaign.
+numpy==2.5.2
+scipy==1.18.1
+pandas==3.0.5
+scikit-learn==1.9.0
+networkx==3.6.1
+torch==2.14.0
+torch_geometric==2.8.0.post1
+pyyaml==6.0.3
+tqdm==4.70.0
+matplotlib==3.11.1
+pytest==9.1.1

@@ -1,0 +1,110 @@
+[
+ {
+  "id": "C25",
+  "verdict": "PASS",
+  "checks": [
+   {
+    "check": "run state == done",
+    "ok": true,
+    "detail": "done"
+   },
+   {
+    "check": "exists: results/campaigns/C25_preflight_pokec_known.json",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "sha256 matches status: results/campaigns/C25_preflight_pokec_known.json",
+    "ok": true,
+    "detail": "artifact changed after the run"
+   },
+   {
+    "check": "manifests on one commit == run commit: results/campaigns/C25_preflight_pokec_known.json",
+    "ok": true,
+    "detail": "['c696a4f0aabab0f54958ba14283b3459d2bb335d']"
+   },
+   {
+    "check": "no git_dirty manifest: results/campaigns/C25_preflight_pokec_known.json",
+    "ok": true,
+    "detail": "0"
+   },
+   {
+    "check": "exists: results/campaigns/C25b_control_pokecz_known.json",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "sha256 matches status: results/campaigns/C25b_control_pokecz_known.json",
+    "ok": true,
+    "detail": "artifact changed after the run"
+   },
+   {
+    "check": "manifests on one commit == run commit: results/campaigns/C25b_control_pokecz_known.json",
+    "ok": true,
+    "detail": "['c696a4f0aabab0f54958ba14283b3459d2bb335d']"
+   },
+   {
+    "check": "no git_dirty manifest: results/campaigns/C25b_control_pokecz_known.json",
+    "ok": true,
+    "detail": "0"
+   },
+   {
+    "check": "C25 preflight total_nodes == 67796",
+    "ok": true,
+    "detail": "67796"
+   },
+   {
+    "check": "C25 preflight known_nodes == 10262",
+    "ok": true,
+    "detail": "10262"
+   },
+   {
+    "check": "C25 preflight known splits sum == 10262",
+    "ok": true,
+    "detail": "{'train': 5131, 'val': 2565, 'test': 2566, 'sum': 10262}"
+   },
+   {
+    "check": "C25 preflight known test nodes == 2566",
+    "ok": true,
+    "detail": "2566"
+   },
+   {
+    "check": "C25 control has M1 and A0 arms",
+    "ok": true,
+    "detail": "['M1_fu_shapley', 'A0_fedavg']"
+   },
+   {
+    "check": "C25 control M1 has seeds 42..51",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C25 control A0 has seeds 42..51",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C25 control AUC non-inferiority at 0.01 (bootstrap seed 0)",
+    "ok": true,
+    "detail": "{'ci_lower': -0.0020600732768490887, 'delta': 0.01, 'pass': True}"
+   }
+  ],
+  "summary": {
+   "preflight": {
+    "total": 67796,
+    "known": 10262,
+    "known_test": 2566
+   },
+   "control_noninferiority": {
+    "ci_lower": -0.0020600732768490887,
+    "delta": 0.01,
+    "pass": true
+   },
+   "wall_clock_min": 160.19,
+   "device": {
+    "cuda_available": true,
+    "host": null
+   }
+  }
+ }
+]

@@ -1,0 +1,73 @@
+{
+  "id": "C20",
+  "title": "Audit fidelity: fixed-state replay and end-to-end metadata capture with faithful rules",
+  "smoke": false,
+  "state": "done",
+  "started": "2026-10-17T18:30:57+00:00",
+  "provenance": {
+    "commit": "80556abffe824f3a989afb1e3f1954b3357deaac",
+    "dirty": false,
+    "source": "git",
+    "dirty_files": []
+  },
+  "platform": "macOS-15.7.9-arm64-arm-64bit",
+  "cuda_available": false,
+  "threads": null,
+  "env_overrides": {},
+  "cmds": [
+    [
+      "python",
+      "experiments/campaigns/c20_fixed_state_replay.py",
+      "--workers",
+      "6",
+      "--rounds",
+      "20",
+      "--out-json",
+      "results/campaigns/C20a_fixed_state_replay.json"
+    ],
+    [
+      "python",
+      "experiments/revision/metadata_capture_endtoend.py",
+      "--dataset",
+      "german",
+      "--rules",
+      "qffl_eq",
+      "fltrust_root",
+      "--out-json",
+      "results/campaigns/C20b_audit_german.json"
+    ],
+    [
+      "python",
+      "experiments/revision/metadata_capture_endtoend.py",
+      "--dataset",
+      "bail",
+      "--rules",
+      "qffl_eq",
+      "fltrust_root",
+      "--out-json",
+      "results/campaigns/C20c_audit_bail.json"
+    ]
+  ],
+  "append_args": null,
+  "exit_codes": [
+    0,
+    0,
+    0
+  ],
+  "outputs": {
+    "results/campaigns/C20a_fixed_state_replay.json": {
+      "sha256": "4ca1e97653e1f888ca3337cd60f7af47b3b40db2100f16e5a8cc1a0c58ee0948",
+      "bytes": 7291274
+    },
+    "results/campaigns/C20b_audit_german.json": {
+      "sha256": "67e924e3ded3d82ad2e1fdc86d38547934a2c284b7bae7984d9d65044e6f35f1",
+      "bytes": 47133
+    },
+    "results/campaigns/C20c_audit_bail.json": {
+      "sha256": "eb150ece9cba2c233bc4747c833ff2d111ec9a7ed9c7bc874f2d158c54cf6755",
+      "bytes": 48496
+    }
+  },
+  "wall_clock_min": 47.5,
+  "finished": "2026-10-17T19:18:27+00:00"
+}

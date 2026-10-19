@@ -1,0 +1,59 @@
+{
+  "id": "C21",
+  "title": "BFWA DP-induced slack vector and heterogeneous privacy contract",
+  "smoke": false,
+  "state": "done",
+  "started": "2026-10-18T02:09:21+00:00",
+  "provenance": {
+    "commit": "18c551e0a9e090a495e1527dc188067b2b12a3c3",
+    "dirty": false,
+    "source": "git",
+    "dirty_files": []
+  },
+  "platform": "macOS-15.7.9-arm64-arm-64bit",
+  "cuda_available": false,
+  "threads": null,
+  "env_overrides": {},
+  "cmds": [
+    [
+      "python",
+      "experiments/revision/bfwa_slack_analysis.py",
+      "--log-sigma-vector",
+      "--dataset",
+      "german",
+      "--num-clients",
+      "10",
+      "--rounds",
+      "20",
+      "--tau",
+      "0.05",
+      "--out-json",
+      "results/campaigns/C21a_bfwa_slack_vector.json"
+    ],
+    [
+      "python",
+      "experiments/campaigns/c21_privacy_contract.py",
+      "--in-json",
+      "results/campaigns/C21a_bfwa_slack_vector.json",
+      "--out-json",
+      "results/campaigns/C21_privacy_contract.json"
+    ]
+  ],
+  "append_args": null,
+  "exit_codes": [
+    0,
+    0
+  ],
+  "outputs": {
+    "results/campaigns/C21a_bfwa_slack_vector.json": {
+      "sha256": "d9e1eafa8d374daf477af2a18d6ac039275d660b0ce1f92b63e1d7266a8e78ce",
+      "bytes": 4564500
+    },
+    "results/campaigns/C21_privacy_contract.json": {
+      "sha256": "d82b86ecb1ba2e491df2f1c4dec7edde41a440a9ec1e2811ebdf7badf2fbe343",
+      "bytes": 351389
+    }
+  },
+  "wall_clock_min": 11.81,
+  "finished": "2026-10-18T02:21:10+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "campaign": "C24",
+  "id": "C24",
+  "state": "done",
+  "provenance": {
+    "commit": "cf8442212236633628b58cc85ecd964993347a26",
+    "dirty": false
+  },
+  "cuda_available": false,
+  "wall_clock_min": 140.4738053085166,
+  "outputs": {
+    "results/campaigns/C24_adaptive_access.json": {
+      "sha256": "63fbff7ff71c0c30cafbb2d730081f27b84a10ef110ea18f230b3cbd4ad7536b",
+      "bytes": 24369967
+    }
+  }
+}

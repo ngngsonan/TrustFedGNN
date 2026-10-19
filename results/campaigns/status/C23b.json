@@ -1,0 +1,39 @@
+{
+  "id": "C23b",
+  "title": "Mechanism subset: 4 arms fairness_poison (German, Bail, 30 seeds)",
+  "smoke": false,
+  "state": "done",
+  "started": "2026-10-18T09:43:00+00:00",
+  "provenance": {
+    "commit": "c696a4f0aabab0f54958ba14283b3459d2bb335d",
+    "dirty": false,
+    "source": "git",
+    "dirty_files": []
+  },
+  "platform": "macOS-15.7.9-arm64-arm-64bit",
+  "cuda_available": false,
+  "threads": null,
+  "env_overrides": {},
+  "cmds": [
+    [
+      "python",
+      "experiments/campaigns/c23b_mechanism_subset.py",
+      "--workers",
+      "6",
+      "--out-json",
+      "results/campaigns/C23b_mechanism_subset.json"
+    ]
+  ],
+  "append_args": null,
+  "exit_codes": [
+    0
+  ],
+  "outputs": {
+    "results/campaigns/C23b_mechanism_subset.json": {
+      "sha256": "5600f6aa930fa35a1807959314d115a981e3c89c9d2297a5c89bc2abbbc141a2",
+      "bytes": 5440649
+    }
+  },
+  "wall_clock_min": 96.61,
+  "finished": "2026-10-18T11:19:37+00:00"
+}

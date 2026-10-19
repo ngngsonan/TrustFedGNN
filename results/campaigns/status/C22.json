@@ -1,0 +1,39 @@
+{
+  "id": "C22",
+  "title": "GuardFed parameter-matched baseline (tuning + confirm, German & Bail)",
+  "smoke": false,
+  "state": "done",
+  "started": "2026-10-18T02:24:50+00:00",
+  "provenance": {
+    "commit": "a9cfaee19685c7034a17444a1ed9caa729e6e65c",
+    "dirty": false,
+    "source": "git",
+    "dirty_files": []
+  },
+  "platform": "macOS-15.7.9-arm64-arm-64bit",
+  "cuda_available": false,
+  "threads": null,
+  "env_overrides": {},
+  "cmds": [
+    [
+      "python",
+      "experiments/campaigns/c22_guardfed_matched.py",
+      "--workers",
+      "6",
+      "--out-json",
+      "results/campaigns/C22_guardfed_matched.json"
+    ]
+  ],
+  "append_args": null,
+  "exit_codes": [
+    0
+  ],
+  "outputs": {
+    "results/campaigns/C22_guardfed_matched.json": {
+      "sha256": "e3336580bb4db0204041bace1681e2ced1b012279ba12b30db217110d7602f4a",
+      "bytes": 708269
+    }
+  },
+  "wall_clock_min": 114.87,
+  "finished": "2026-10-18T04:19:43+00:00"
+}

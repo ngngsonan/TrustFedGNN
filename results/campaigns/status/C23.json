@@ -1,0 +1,39 @@
+{
+  "id": "C23",
+  "title": "Mechanism factorial: 2x2 order x magnitude + faithful baselines (German, Bail, 30 seeds)",
+  "smoke": false,
+  "state": "done",
+  "started": "2026-10-18T04:22:49+00:00",
+  "provenance": {
+    "commit": "c9fa82487436b33feae7109dc2f2855ac799fbb1",
+    "dirty": false,
+    "source": "git",
+    "dirty_files": []
+  },
+  "platform": "macOS-15.7.9-arm64-arm-64bit",
+  "cuda_available": false,
+  "threads": null,
+  "env_overrides": {},
+  "cmds": [
+    [
+      "python",
+      "experiments/campaigns/c23_mechanism_factorial.py",
+      "--workers",
+      "6",
+      "--out-json",
+      "results/campaigns/C23_mechanism_factorial.json"
+    ]
+  ],
+  "append_args": null,
+  "exit_codes": [
+    0
+  ],
+  "outputs": {
+    "results/campaigns/C23_mechanism_factorial.json": {
+      "sha256": "7692b60f6d3a0e467021b897e642b195420f7775dfbe8aaefe6f448dc199066d",
+      "bytes": 12677199
+    }
+  },
+  "wall_clock_min": 235.35,
+  "finished": "2026-10-18T08:32:36+00:00"
+}

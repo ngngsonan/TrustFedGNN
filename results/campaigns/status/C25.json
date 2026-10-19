@@ -1,0 +1,87 @@
+{
+  "id": "C25",
+  "title": "Pokec-z known-label protocol (SOTA, aggregator control, FLTrust EMA, preflight)",
+  "smoke": false,
+  "state": "done",
+  "started": "2026-10-18T10:01:56+00:00",
+  "provenance": {
+    "commit": "c696a4f0aabab0f54958ba14283b3459d2bb335d",
+    "dirty": false,
+    "source": "git",
+    "dirty_files": []
+  },
+  "platform": "Linux-x86_64",
+  "cuda_available": true,
+  "threads": null,
+  "env_overrides": {},
+  "cmds": [
+    [
+      "python",
+      "experiments/campaigns/c25_preflight.py"
+    ],
+    [
+      "python",
+      "experiments/run_sota_pokecz.py",
+      "--pokec-label-protocol",
+      "known_only",
+      "--extra-methods",
+      "fltrust_root",
+      "--out",
+      "results/campaigns/C25a_sota_pokecz_known.json"
+    ],
+    [
+      "python",
+      "experiments/colab/run_revision_gpu.py",
+      "--job",
+      "pokecz_control",
+      "--device",
+      "cuda",
+      "--pokec-label-protocol",
+      "known_only",
+      "--pokecz-out",
+      "results/campaigns/C25b_control_pokecz_known.json"
+    ],
+    [
+      "python",
+      "experiments/revision/fltrust_ema_benchmark.py",
+      "--device",
+      "cuda",
+      "--pokec-label-protocol",
+      "known_only",
+      "--extra-methods",
+      "fltrust_root",
+      "--output",
+      "results/campaigns/C25c_fltrust_ema_pokecz_known.json"
+    ]
+  ],
+  "append_args": null,
+  "exit_codes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "outputs": {
+    "results/campaigns/C25_preflight_pokec_known.json": {
+      "sha256": "f01fef094fe1bb171022615fa3df7233c4bcf6f3d63831a94a0ffc096f73878f",
+      "bytes": 1224
+    },
+    "results/campaigns/C25b_control_pokecz_known.json": {
+      "sha256": "149af97e6530e69d265f35fd1b62276ce7e0c011f442f58b855eec6a533a021f",
+      "bytes": 6992
+    }
+  },
+  "wall_clock_min": 160.19,
+  "finished": "2026-10-18T12:42:13+00:00",
+  "notes": "C25_preflight ran on a local Mac; C25b ran on a Colab T4 GPU. C25a/C25c are not part of this repository.",
+  "output_provenance": {
+    "results/campaigns/C25_preflight_pokec_known.json": {
+      "host": "local-mac",
+      "device": "cpu"
+    },
+    "results/campaigns/C25b_control_pokecz_known.json": {
+      "host": "colab-gpu-t4",
+      "device": "cuda"
+    }
+  }
+}

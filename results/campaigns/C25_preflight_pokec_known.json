@@ -1,0 +1,43 @@
+{
+  "manifest": {
+    "git_commit": "c696a4f0aabab0f54958ba14283b3459d2bb335d",
+    "git_dirty": false,
+    "device": "cpu",
+    "timestamp": "2026-10-18T12:47:37.282225+00:00",
+    "torch_version": "2.14.0",
+    "torch_num_threads": 4,
+    "python_version": "3.12.12",
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "experiment": "C25_preflight_pokec_known",
+    "args": {
+      "dataset": "pokec_z",
+      "protocols": [
+        "legacy_negative",
+        "known_only"
+      ]
+    }
+  },
+  "total_nodes": 67796,
+  "known_nodes": 10262,
+  "known_fraction": 0.15136586229276064,
+  "known_splits": {
+    "train": 5131,
+    "val": 2565,
+    "test": 2566,
+    "sum": 10262
+  },
+  "known_only": {
+    "positive_rate": 0.5357630252838135,
+    "negative_rate": 0.4642369747161865,
+    "group1_rate": 0.3551939129829407,
+    "group0_rate": 0.6448060870170593,
+    "fingerprint": "cd59284ea4592d84cd6f8d49c81a2176aca7b12f12a51c673a8ae33aca4a3d6c"
+  },
+  "legacy_negative": {
+    "positive_rate": 0.08109623193740845,
+    "negative_rate": 0.9189037680625916,
+    "group1_rate": 0.35155466198921204,
+    "group0_rate": 0.648445338010788,
+    "fingerprint": "a37e437714cc18c035a34ff9d528c8ffa9577fcc9d4e613a0624ec01e632c47a"
+  }
+}
