@@ -383,8 +383,23 @@ def chk_C26(d, r):
             }
 
 
+def chk_C24r(d, r):
+    """C24r: the 20 S3 x FedAvg runs, with the true sample count, in the C24 environment."""
+    runs = d.get("raw_runs", [])
+    r.check("C24r has 20 runs", len(runs) == 20, len(runs))
+    r.check("C24r runs are S3 x FedAvg only", all(x["schedule"] == "S3" and x["method"] == "fedavg" for x in runs))
+    r.check("C24r covers german and bail x seeds 42..51",
+            {(x["dataset"], x["seed"]) for x in runs} == {(ds, s) for ds in ("german", "bail") for s in SEEDS_10})
+    with open(os.path.join(REPO, OUT, "C24_adaptive_access.json")) as f:
+        c24 = json.load(f)
+    r.check("C24r torch version equals C24's", d["manifest"].get("torch_version") == c24["manifest"].get("torch_version"),
+            (d["manifest"].get("torch_version"), c24["manifest"].get("torch_version")))
+    r.check("C24r adversaries keep a nonzero FedAvg weight",
+            all(min(p["w_adv_round"] for p in x["per_round"]) > 0.01 for x in runs))
+
+
 CHECKS = {"C05": chk_C05, "C20": chk_C20, "C20r": chk_C20r, "C21": chk_C21, "C22": chk_C22,
-          "C23": chk_C23, "C23b": chk_C23b, "C24": chk_C24, "C25": chk_C25, "C26": chk_C26}
+          "C23": chk_C23, "C23b": chk_C23b, "C24": chk_C24, "C24r": chk_C24r, "C25": chk_C25, "C26": chk_C26}
 MULTI = {"C20", "C21", "C25"}
 
 

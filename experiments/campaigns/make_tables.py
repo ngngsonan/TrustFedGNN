@@ -26,7 +26,7 @@ import numpy as np
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 sys.path.insert(0, ROOT)
 
-from experiments.campaigns.analyze_discover_ai import C24_INVALID_CELLS  # noqa: E402
+from experiments.campaigns.analyze_discover_ai import load_c24  # noqa: E402
 from experiments.campaigns.stats_p5 import noninferiority, wilcoxon_p  # noqa: E402
 
 RES = os.path.join(ROOT, "results")
@@ -214,14 +214,12 @@ C24_SCHEDULES = (("S1", "sustained"), ("S2", "intermittent"), ("S3", "reference 
 
 
 def tab_c24_boundary() -> str:
-    c24 = load("campaigns/C24_adaptive_access.json")
+    c24 = load_c24()
     act = load(ANALYSIS)["c24_active_rounds"]
     rows = []
     for ds, dlab in (("german", "German"), ("bail", "Bail")):
         for sch, slab in C24_SCHEDULES:
             for meth, mlab in C24_METHODS:
-                if (sch, meth) in C24_INVALID_CELLS:
-                    continue
                 e, a = c24["results"][ds][sch][meth], act[ds][sch][meth]
                 rows.append(f"{dlab} & {slab} & {mlab} & {a['w_adv_active_mean']:.3f} & {a['I_adv_active_mean']:.3f} & "
                             f"{e['mean_auc']:.3f} & {e['mean_dpd']:.3f} & {e['mean_eod']:.3f} \\\\")
@@ -234,15 +232,17 @@ def tab_c24_boundary() -> str:
     require(all(lowest("bail", s, "I_adv_active_mean") == "fu_shapley" for s in ("S1", "S2")),
             "on Bail, FU-Alignment has the lowest processed influence under sustained and intermittent poisoning")
     require(all(lowest(ds, "S3", k) == "fu_shapley" for ds in ("german", "bail") for k in ("w_adv_active_mean", "I_adv_active_mean")),
-            "under reference evasion FU-Alignment has the lowest weight and influence of the valid methods")
+            "under reference evasion FU-Alignment has the lowest weight and influence of the four methods")
+    require(all(max(c24["results"][ds]["S3"], key=lambda m: c24["results"][ds]["S3"][m]["mean_auc"]) == "fu_shapley"
+                for ds in ("german", "bail")), "under reference evasion FU-Alignment keeps the highest AUC")
     g2 = act["german"]["S2"]
     require(g2["fu_shapley"]["w_adv_active_mean"] > max(g2["fedavg"]["w_adv_active_mean"], g2["fltrust_root"]["w_adv_active_mean"])
             and g2["fu_shapley"]["I_adv_active_mean"] > max(g2["fedavg"]["I_adv_active_mean"], g2["fltrust_root"]["I_adv_active_mean"]),
             "German intermittent poisoning is the boundary")
-    tex = header({"campaigns/C24_adaptive_access.json": c24, ANALYSIS: {}}) + r"""\begin{table*}[t]
+    tex = header({"campaigns/C24_adaptive_access.json": c24, "campaigns/C24r_s3_fedavg.json": c24["replaced_from"], ANALYSIS: {}}) + r"""\begin{table*}[t]
 \centering
 \scriptsize
-\caption{\textbf{Adaptive-access boundary map.} $K=10$ clients, two adversaries, 40 rounds, means over 10 paired seeds. $w_{\rm adv}$ and $I_{\rm adv}$ are averaged over the rounds in which the adversaries poison (from round 10 under sustained poisoning, alternate five-round blocks under intermittent poisoning, every round after the first under reference evasion); AUC, DPD and EOD are final endpoints. On Bail, FU-Alignment has the lowest processed influence under sustained and intermittent poisoning, and under reference evasion it gives the adversaries less weight and influence than root-FLTrust and GuardFed-style on both datasets. Intermittent poisoning on German is the boundary: FU-Alignment gives the adversaries more weight and influence than FedAvg and root-FLTrust. The FedAvg reference-evasion cells are omitted because that run under-reported the adversaries' sample count. All-round means are in the Supplementary Information (ESM 1).}
+\caption{\textbf{Adaptive-access boundary map.} $K=10$ clients, two adversaries, 40 rounds, means over 10 paired seeds. $w_{\rm adv}$ and $I_{\rm adv}$ are averaged over the rounds in which the adversaries poison (from round 10 under sustained poisoning, alternate five-round blocks under intermittent poisoning, every round after the first under reference evasion); AUC, DPD and EOD are final endpoints. On Bail, FU-Alignment has the lowest processed influence under sustained and intermittent poisoning, and under reference evasion it gives the adversaries the lowest weight and influence of the four methods and keeps the highest AUC on both datasets. Intermittent poisoning on German is the boundary: FU-Alignment gives the adversaries more weight and influence than FedAvg and root-FLTrust. All-round means are in the Supplementary Information (ESM 1).}
 \label{tab:c24_boundary}
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{lllrrrrr}
@@ -317,15 +317,12 @@ $\epsilon$ & $R_{\rm het}$ & $R_{\rm equal}$ & \textbf{Excluded rounds} \\
 
 
 def tab_c24_access() -> str:
-    c24 = load("campaigns/C24_adaptive_access.json")
+    c24 = load_c24()
     rows = []
     for ds, dlab in (("german", "German"), ("bail", "Bail")):
         for sch, _ in C24_SCHEDULES:
             for meth, mlab in C24_METHODS:
                 x = c24["results"][ds][sch][meth]
-                if (sch, meth) in C24_INVALID_CELLS:
-                    rows.append(f"{dlab} & {sch} & {mlab} & \\multicolumn{{4}}{{c}}{{excluded (sample count under-reported)}} \\\\")
-                    continue
                 rows.append(f"{dlab} & {sch} & {mlab} & {x['mean_w_adv']:.4f} & {x['mean_I_adv']:.3f} & {x['mean_auc']:.4f} & {x['mean_dpd']:.4f} \\\\")
             rows.append("\\addlinespace[2pt]")
         for meth, mlab in C24_METHODS:
@@ -333,10 +330,10 @@ def tab_c24_access() -> str:
             rows.append(f"{dlab} & benign & {mlab} & --- & --- & {x['mean_auc']:.4f} & {x['mean_dpd']:.4f} \\\\")
         rows.append("\\addlinespace[2pt]")
     rows.pop()
-    tex = header({"campaigns/C24_adaptive_access.json": c24}) + r"""\begin{table*}[t]
+    tex = header({"campaigns/C24_adaptive_access.json": c24, "campaigns/C24r_s3_fedavg.json": c24["replaced_from"]}) + r"""\begin{table*}[t]
 \centering
 \footnotesize
-\caption{\textbf{Adaptive-access results averaged over all 40 rounds.} S1 is sustained poisoning from round 10, S2 is intermittent poisoning (five rounds on, five off from round 10), and S3 is reference evasion. Unlike the boundary table of the main text, $w_{\rm adv}$ and $I_{\rm adv}$ here average over every round, including those in which the adversaries behave honestly. Means over 10 paired seeds. The FedAvg S3 cells are excluded: the adversaries' report omitted the sample count, which FedAvg reads.}
+\caption{\textbf{Adaptive-access results averaged over all 40 rounds.} S1 is sustained poisoning from round 10, S2 is intermittent poisoning (five rounds on, five off from round 10), and S3 is reference evasion. Unlike the boundary table of the main text, $w_{\rm adv}$ and $I_{\rm adv}$ here average over every round, including those in which the adversaries behave honestly. Means over 10 paired seeds.}
 \label{tab:c24_access}
 \setlength{\tabcolsep}{5pt}
 \begin{tabular}{lllrrrr}

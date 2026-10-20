@@ -6,7 +6,7 @@ import os
 
 import torch
 
-from experiments.campaigns.analyze_discover_ai import C24_INVALID_CELLS, active_poison_round
+from experiments.campaigns.analyze_discover_ai import C24_REPLACED_CELLS, active_poison_round, load_c24
 from experiments.campaigns.c20_fixed_state_replay import union_lie
 from experiments.campaigns.c24_adaptive_access import AdaptiveAccessTrainer
 from experiments.campaigns.campaigns import CAMPAIGNS, OUT
@@ -67,7 +67,16 @@ def test_c24_active_round_boundary():
 def test_s3_report_carries_the_true_sample_count():
     src = inspect.getsource(AdaptiveAccessTrainer._round)
     assert '"n": m["n"]' in src
-    assert ("S3", "fedavg") in C24_INVALID_CELLS
+    assert ("S3", "fedavg") in C24_REPLACED_CELLS
+
+
+def test_c24r_replaces_exactly_the_s3_fedavg_runs():
+    c24 = load_c24()
+    cells = [(r["dataset"], r["schedule"], r["method"], r["seed"]) for r in c24["raw_runs"]]
+    assert len(cells) == len(set(cells)) == 320
+    s3_fedavg = [r for r in c24["raw_runs"] if (r["schedule"], r["method"]) == ("S3", "fedavg")]
+    assert len(s3_fedavg) == 20
+    assert all(min(p["w_adv_round"] for p in r["per_round"]) > 0.01 for r in s3_fedavg)
 
 
 def _weights(method, metas, **kw):

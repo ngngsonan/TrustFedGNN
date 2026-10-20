@@ -37,10 +37,26 @@ def active_poison_round(stored_round: int, schedule: str) -> bool:
     return False
 
 
-# The S3 report omitted the sample count `n`, which FedAvg reads (aggregate()
-# defaults it to 1). Those 20 cells are excluded; the other methods do not read
-# `n` (see tests/test_campaigns.py).
-C24_INVALID_CELLS = {("S3", "fedavg")}
+# In C24 the S3 report omitted the sample count `n`, which FedAvg reads
+# (aggregate() defaults it to 1). C24r re-ran exactly those 20 runs in the same
+# environment with the corrected report; load_c24() substitutes them. The other
+# methods do not read `n` (see tests/test_campaigns.py).
+C24_REPLACED_CELLS = {("S3", "fedavg")}
+
+
+def load_c24() -> dict:
+    """C24 with the S3 x FedAvg cells (raw runs and summaries) taken from C24r."""
+    c24, c24r = load("C24_adaptive_access.json"), load("C24r_s3_fedavg.json")
+    def replaced(r):
+        return (r["schedule"], r["method"]) in C24_REPLACED_CELLS
+    new = [r for r in c24r["raw_runs"] if replaced(r)]
+    assert len(new) == sum(replaced(r) for r in c24["raw_runs"]) == 20, "C24r must replace exactly 20 runs"
+    c24["raw_runs"] = [r for r in c24["raw_runs"] if not replaced(r)] + new
+    for ds, by_sch in c24r["results"].items():
+        for sch, meth in C24_REPLACED_CELLS:
+            c24["results"][ds][sch][meth] = by_sch[sch][meth]
+    c24["replaced_from"] = {"artifact": "C24r_s3_fedavg.json", "manifest": c24r["manifest"]}
+    return c24
 
 
 def c24_active_round_summary(c24: dict) -> Dict:
@@ -48,7 +64,7 @@ def c24_active_round_summary(c24: dict) -> Dict:
     out: Dict = {}
     for run in c24["raw_runs"]:
         sch, meth = run["schedule"], run["method"]
-        if sch == "benign" or abs(run["byzantine_fraction"] - 0.2) > 1e-9 or (sch, meth) in C24_INVALID_CELLS:
+        if sch == "benign" or abs(run["byzantine_fraction"] - 0.2) > 1e-9:
             continue
         rounds = [pr for pr in run["per_round"] if active_poison_round(pr["round"], sch)]
         cell = out.setdefault(run["dataset"], {}).setdefault(sch, {}).setdefault(
@@ -176,7 +192,7 @@ def main() -> None:
     for result, adjusted in zip(alpha_results, holm([x["wilcoxon_p"] for x in alpha_results])):
         result["holm_p_across_8"] = adjusted
 
-    output["c24_active_rounds"] = c24_active_round_summary(load("C24_adaptive_access.json"))
+    output["c24_active_rounds"] = c24_active_round_summary(load_c24())
     output["c05"] = c05_summary(load("C05_adaptive_poisoner.json"))
     output["c23b_influence"] = c23b_influence(load("C23b_mechanism_subset.json"))
 

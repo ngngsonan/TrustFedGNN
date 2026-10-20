@@ -44,7 +44,7 @@ Client partitions are drawn with torch's random number generator. The same seed 
 | C21 | report-privacy diagnostic (SI) | macOS arm64, CPU, torch 2.14.0 |
 | C22 | GuardFed-style tuning (SI) | macOS arm64, CPU, torch 2.14.0 |
 | C23, C23b, C26 | controlled fairness poisoning, logged replay, α = 0 | macOS arm64, CPU, torch 2.14.0 |
-| C24 | adaptive access | Linux x86-64, CPU, torch 2.5.1 |
+| C24, C24r | adaptive access (C24r: reference evasion × FedAvg) | Linux x86-64, CPU, torch 2.5.1 |
 | C25 | Pokec-z known-label control | preflight: macOS CPU; control: Colab T4 GPU, torch 2.11.0 |
 | C05 | supporting stealth sweep (SI) | macOS arm64, CPU, torch 2.14.0 |
 
@@ -54,7 +54,7 @@ GPU results are numerically reproducible, not bit-exact.
 
 These are documented rather than fixed by a re-run, because they do not affect a reported number. Each is handled where it matters.
 
-- **C24, reference evasion × FedAvg.** The adversaries' report omitted the sample count `n`, which FedAvg reads (`aggregate` defaults it to 1). These 20 runs are excluded from every table and claim (`analyze_discover_ai.py::C24_INVALID_CELLS`). The other three methods do not read `n` (`tests/test_campaigns.py`). The runner has since been fixed.
+- **C24, reference evasion × FedAvg.** In C24 the adversaries' report omitted the sample count `n`, which FedAvg reads (`aggregate` defaults it to 1). C24r re-ran these 20 runs with the fixed runner in the C24 environment; an environment check first re-ran one stored C24 cell and reproduced it bit for bit. `analyze_discover_ai.py::load_c24` substitutes the C24r runs. The other three methods do not read `n` (`tests/test_campaigns.py`).
 - **C24 round indexing.** Stored rounds are 1-indexed, while the schedules are defined on the 0-indexed round of the trainer; `active_poison_round` converts between them (`tests/test_campaigns.py::test_c24_active_round_boundary`).
 - **C23 `I_adv` field.** It was written before the mechanism logger was fixed and holds the adversarial weight; the article takes processed influence from C23b and C24 only.
 - **C20 (C20b/c), q-FFL-eq arm.** Its updates are about 10⁻³ of root-FLTrust's and its clean AUC is near chance (0.54 German, 0.51 Bail). The arm is not used as evidence; only the root-FLTrust invariance of this campaign is cited.

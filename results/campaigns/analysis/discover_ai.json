@@ -266,6 +266,11 @@
         }
       },
       "S3": {
+        "fedavg": {
+          "I_adv_active_mean": 60.73837257134609,
+          "n_seeds": 10,
+          "w_adv_active_mean": 0.1909302830696106
+        },
         "fltrust_root": {
           "I_adv_active_mean": 0.8983241934711353,
           "n_seeds": 10,
@@ -329,6 +334,11 @@
         }
       },
       "S3": {
+        "fedavg": {
+          "I_adv_active_mean": 3.2720841195338815,
+          "n_seeds": 10,
+          "w_adv_active_mean": 0.20199999883770942
+        },
         "fltrust_root": {
           "I_adv_active_mean": 1.054256229981398,
           "n_seeds": 10,

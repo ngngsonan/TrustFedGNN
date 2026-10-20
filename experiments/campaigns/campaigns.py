@@ -211,6 +211,19 @@ CAMPAIGNS: List[Campaign] = [
         notes="Evaluates defence resilience under constrained adversary access schedules (S1, S2, S3) and clean baseline.",
     ),
     Campaign(
+        id="C24r", title="C24 reference evasion x FedAvg re-run with the true sample count in the adversaries' report",
+        priority="P0", findings=("C24-S3-n",), where="cpu-local",
+        cmds=([PY, "experiments/campaigns/c24_adaptive_access.py", "--methods", "fedavg", "--schedules", "S3",
+               "--no-benign", "--tag", "C24r", "--workers", "10", "--out-json", f"{OUT}/C24r_s3_fedavg.json"],),
+        outputs=(f"{OUT}/C24r_s3_fedavg.json",),
+        smoke_cmds=(),
+        smoke_outputs=(),
+        est_minutes="~15 on an 8-core Linux CPU (20 runs)",
+        feeds="tab_c24_boundary, tab_c24_access (replaces the 20 S3 x FedAvg cells of C24)",
+        notes="Must run in the C24 environment (torch 2.5.1) so that partitions match the other C24 cells; "
+              "an environment check re-ran one stored C24 cell bit for bit before this run.",
+    ),
+    Campaign(
         id="C26", title="FU-Alignment fairness-reference isolation (alpha=0, German and Bail, 30 seeds)",
         priority="P0", findings=("DiscoverAI-B4",), where="cpu-local",
         cmds=([PY, "experiments/campaigns/c26_fu_alpha0.py", "--workers", "6",

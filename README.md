@@ -58,7 +58,7 @@ Datasets are downloaded on first use from the public NIFTY and FairGNN releases 
 
 ## Provenance note
 
-The artifacts were produced in the authors' development repository before this snapshot was created. Their manifests therefore record development-repository commits. The two exceptions are C20r and anything produced later, which record commits of this repository. Each status file lists the exact command lines that produced its artifacts. A few artifact files still name an older results directory in their internal path strings; the files themselves live in `results/campaigns/`, and their hashes are unchanged.
+The artifacts were produced in the authors' development repository before this snapshot was created. Their manifests therefore record development-repository commits. The exceptions are C20r and C24r, which record commits of this repository. Each status file lists the exact command lines that produced its artifacts. A few artifact files still name an older results directory in their internal path strings; the files themselves live in `results/campaigns/`, and their hashes are unchanged.
 
 ## License
 

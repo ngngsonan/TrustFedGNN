@@ -1289,17 +1289,7 @@
    {
     "check": "C21a covers 7 epsilons",
     "ok": true,
-    "detail": "{'8.0', '4.0', '16.0', '2.0', '32.0', '1.0', '0.5'}"
-   },
-   {
-    "check": "C21a eps=8.0 has 200 rounds",
-    "ok": true,
-    "detail": "200"
-   },
-   {
-    "check": "C21a eps=8.0 client_vectors recorded (K=10)",
-    "ok": true,
-    "detail": "10"
+    "detail": "{'4.0', '32.0', '0.5', '1.0', '2.0', '16.0', '8.0'}"
    },
    {
     "check": "C21a eps=4.0 has 200 rounds",
@@ -1308,26 +1298,6 @@
    },
    {
     "check": "C21a eps=4.0 client_vectors recorded (K=10)",
-    "ok": true,
-    "detail": "10"
-   },
-   {
-    "check": "C21a eps=16.0 has 200 rounds",
-    "ok": true,
-    "detail": "200"
-   },
-   {
-    "check": "C21a eps=16.0 client_vectors recorded (K=10)",
-    "ok": true,
-    "detail": "10"
-   },
-   {
-    "check": "C21a eps=2.0 has 200 rounds",
-    "ok": true,
-    "detail": "200"
-   },
-   {
-    "check": "C21a eps=2.0 client_vectors recorded (K=10)",
     "ok": true,
     "detail": "10"
    },
@@ -1342,16 +1312,6 @@
     "detail": "10"
    },
    {
-    "check": "C21a eps=1.0 has 200 rounds",
-    "ok": true,
-    "detail": "200"
-   },
-   {
-    "check": "C21a eps=1.0 client_vectors recorded (K=10)",
-    "ok": true,
-    "detail": "10"
-   },
-   {
     "check": "C21a eps=0.5 has 200 rounds",
     "ok": true,
     "detail": "200"
@@ -1362,9 +1322,49 @@
     "detail": "10"
    },
    {
+    "check": "C21a eps=1.0 has 200 rounds",
+    "ok": true,
+    "detail": "200"
+   },
+   {
+    "check": "C21a eps=1.0 client_vectors recorded (K=10)",
+    "ok": true,
+    "detail": "10"
+   },
+   {
+    "check": "C21a eps=2.0 has 200 rounds",
+    "ok": true,
+    "detail": "200"
+   },
+   {
+    "check": "C21a eps=2.0 client_vectors recorded (K=10)",
+    "ok": true,
+    "detail": "10"
+   },
+   {
+    "check": "C21a eps=16.0 has 200 rounds",
+    "ok": true,
+    "detail": "200"
+   },
+   {
+    "check": "C21a eps=16.0 client_vectors recorded (K=10)",
+    "ok": true,
+    "detail": "10"
+   },
+   {
+    "check": "C21a eps=8.0 has 200 rounds",
+    "ok": true,
+    "detail": "200"
+   },
+   {
+    "check": "C21a eps=8.0 client_vectors recorded (K=10)",
+    "ok": true,
+    "detail": "10"
+   },
+   {
     "check": "C21 contract covers 7 epsilons",
     "ok": true,
-    "detail": "{'8.0', '4.0', '16.0', '2.0', '32.0', '1.0', '0.5'}"
+    "detail": "{'4.0', '32.0', '0.5', '1.0', '2.0', '16.0', '8.0'}"
    }
   ],
   "summary": {
@@ -1647,22 +1647,22 @@
     "detail": ""
    },
    {
-    "check": "C23b german A1_fltrust has 30 seeds",
+    "check": "C23b german A5_fltrust_ema has 30 seeds",
     "ok": true,
     "detail": "30"
    },
    {
-    "check": "C23b german A1_fltrust seeds are 42..71",
+    "check": "C23b german A5_fltrust_ema seeds are 42..71",
     "ok": true,
     "detail": "30"
    },
    {
-    "check": "C23b german A1_fltrust all 30 records have exactly 20 rounds",
+    "check": "C23b german A5_fltrust_ema all 30 records have exactly 20 rounds",
     "ok": true,
     "detail": ""
    },
    {
-    "check": "C23b german A1_fltrust all rounds have finite mechanism metrics",
+    "check": "C23b german A5_fltrust_ema all rounds have finite mechanism metrics",
     "ok": true,
     "detail": ""
    },
@@ -1687,22 +1687,22 @@
     "detail": ""
    },
    {
-    "check": "C23b german A5_fltrust_ema has 30 seeds",
+    "check": "C23b german A1_fltrust has 30 seeds",
     "ok": true,
     "detail": "30"
    },
    {
-    "check": "C23b german A5_fltrust_ema seeds are 42..71",
+    "check": "C23b german A1_fltrust seeds are 42..71",
     "ok": true,
     "detail": "30"
    },
    {
-    "check": "C23b german A5_fltrust_ema all 30 records have exactly 20 rounds",
+    "check": "C23b german A1_fltrust all 30 records have exactly 20 rounds",
     "ok": true,
     "detail": ""
    },
    {
-    "check": "C23b german A5_fltrust_ema all rounds have finite mechanism metrics",
+    "check": "C23b german A1_fltrust all rounds have finite mechanism metrics",
     "ok": true,
     "detail": ""
    },
@@ -1737,22 +1737,22 @@
     "detail": ""
    },
    {
-    "check": "C23b bail A1_fltrust has 30 seeds",
+    "check": "C23b bail A5_fltrust_ema has 30 seeds",
     "ok": true,
     "detail": "30"
    },
    {
-    "check": "C23b bail A1_fltrust seeds are 42..71",
+    "check": "C23b bail A5_fltrust_ema seeds are 42..71",
     "ok": true,
     "detail": "30"
    },
    {
-    "check": "C23b bail A1_fltrust all 30 records have exactly 20 rounds",
+    "check": "C23b bail A5_fltrust_ema all 30 records have exactly 20 rounds",
     "ok": true,
     "detail": ""
    },
    {
-    "check": "C23b bail A1_fltrust all rounds have finite mechanism metrics",
+    "check": "C23b bail A5_fltrust_ema all rounds have finite mechanism metrics",
     "ok": true,
     "detail": ""
    },
@@ -1777,22 +1777,22 @@
     "detail": ""
    },
    {
-    "check": "C23b bail A5_fltrust_ema has 30 seeds",
+    "check": "C23b bail A1_fltrust has 30 seeds",
     "ok": true,
     "detail": "30"
    },
    {
-    "check": "C23b bail A5_fltrust_ema seeds are 42..71",
+    "check": "C23b bail A1_fltrust seeds are 42..71",
     "ok": true,
     "detail": "30"
    },
    {
-    "check": "C23b bail A5_fltrust_ema all 30 records have exactly 20 rounds",
+    "check": "C23b bail A1_fltrust all 30 records have exactly 20 rounds",
     "ok": true,
     "detail": ""
    },
    {
-    "check": "C23b bail A5_fltrust_ema all rounds have finite mechanism metrics",
+    "check": "C23b bail A1_fltrust all rounds have finite mechanism metrics",
     "ok": true,
     "detail": ""
    }
@@ -1962,7 +1962,7 @@
    {
     "check": "C24 german has S3 and benign",
     "ok": true,
-    "detail": "['benign', 'S1', 'S2', 'S3']"
+    "detail": "['benign', 'S1', 'S3', 'S2']"
    },
    {
     "check": "C24 german benign has 4 methods",
@@ -1985,21 +1985,6 @@
     "detail": ""
    },
    {
-    "check": "C24 german benign fu_shapley has 10 seeds (42..51)",
-    "ok": true,
-    "detail": "found 10 seeds"
-   },
-   {
-    "check": "C24 german benign fu_shapley metrics finite",
-    "ok": true,
-    "detail": ""
-   },
-   {
-    "check": "C24 german benign fu_shapley benign w_adv and I_adv are zero",
-    "ok": true,
-    "detail": ""
-   },
-   {
     "check": "C24 german benign fedavg has 10 seeds (42..51)",
     "ok": true,
     "detail": "found 10 seeds"
@@ -2011,6 +1996,21 @@
    },
    {
     "check": "C24 german benign fedavg benign w_adv and I_adv are zero",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german benign fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german benign fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german benign fu_shapley benign w_adv and I_adv are zero",
     "ok": true,
     "detail": ""
    },
@@ -2045,16 +2045,6 @@
     "detail": ""
    },
    {
-    "check": "C24 german S1 fu_shapley has 10 seeds (42..51)",
-    "ok": true,
-    "detail": "found 10 seeds"
-   },
-   {
-    "check": "C24 german S1 fu_shapley metrics finite",
-    "ok": true,
-    "detail": ""
-   },
-   {
     "check": "C24 german S1 fedavg has 10 seeds (42..51)",
     "ok": true,
     "detail": "found 10 seeds"
@@ -2065,57 +2055,22 @@
     "detail": ""
    },
    {
+    "check": "C24 german S1 fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S1 fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
     "check": "C24 german S1 guardfed_style has 10 seeds (42..51)",
     "ok": true,
     "detail": "found 10 seeds"
    },
    {
     "check": "C24 german S1 guardfed_style metrics finite",
-    "ok": true,
-    "detail": ""
-   },
-   {
-    "check": "C24 german S2 has 4 methods",
-    "ok": true,
-    "detail": "['fedavg', 'fltrust_root', 'fu_shapley', 'guardfed_style']"
-   },
-   {
-    "check": "C24 german S2 fltrust_root has 10 seeds (42..51)",
-    "ok": true,
-    "detail": "found 10 seeds"
-   },
-   {
-    "check": "C24 german S2 fltrust_root metrics finite",
-    "ok": true,
-    "detail": ""
-   },
-   {
-    "check": "C24 german S2 fu_shapley has 10 seeds (42..51)",
-    "ok": true,
-    "detail": "found 10 seeds"
-   },
-   {
-    "check": "C24 german S2 fu_shapley metrics finite",
-    "ok": true,
-    "detail": ""
-   },
-   {
-    "check": "C24 german S2 fedavg has 10 seeds (42..51)",
-    "ok": true,
-    "detail": "found 10 seeds"
-   },
-   {
-    "check": "C24 german S2 fedavg metrics finite",
-    "ok": true,
-    "detail": ""
-   },
-   {
-    "check": "C24 german S2 guardfed_style has 10 seeds (42..51)",
-    "ok": true,
-    "detail": "found 10 seeds"
-   },
-   {
-    "check": "C24 german S2 guardfed_style metrics finite",
     "ok": true,
     "detail": ""
    },
@@ -2135,22 +2090,22 @@
     "detail": ""
    },
    {
-    "check": "C24 german S3 fu_shapley has 10 seeds (42..51)",
-    "ok": true,
-    "detail": "found 10 seeds"
-   },
-   {
-    "check": "C24 german S3 fu_shapley metrics finite",
-    "ok": true,
-    "detail": ""
-   },
-   {
     "check": "C24 german S3 fedavg has 10 seeds (42..51)",
     "ok": true,
     "detail": "found 10 seeds"
    },
    {
     "check": "C24 german S3 fedavg metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S3 fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S3 fu_shapley metrics finite",
     "ok": true,
     "detail": ""
    },
@@ -2165,9 +2120,54 @@
     "detail": ""
    },
    {
+    "check": "C24 german S2 has 4 methods",
+    "ok": true,
+    "detail": "['fedavg', 'fltrust_root', 'fu_shapley', 'guardfed_style']"
+   },
+   {
+    "check": "C24 german S2 fltrust_root has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S2 fltrust_root metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S2 fedavg has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S2 fedavg metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S2 fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S2 fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 german S2 guardfed_style has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 german S2 guardfed_style metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
     "check": "C24 bail has S3 and benign",
     "ok": true,
-    "detail": "['benign', 'S1', 'S2', 'S3']"
+    "detail": "['benign', 'S1', 'S3', 'S2']"
    },
    {
     "check": "C24 bail benign has 4 methods",
@@ -2190,21 +2190,6 @@
     "detail": ""
    },
    {
-    "check": "C24 bail benign fu_shapley has 10 seeds (42..51)",
-    "ok": true,
-    "detail": "found 10 seeds"
-   },
-   {
-    "check": "C24 bail benign fu_shapley metrics finite",
-    "ok": true,
-    "detail": ""
-   },
-   {
-    "check": "C24 bail benign fu_shapley benign w_adv and I_adv are zero",
-    "ok": true,
-    "detail": ""
-   },
-   {
     "check": "C24 bail benign fedavg has 10 seeds (42..51)",
     "ok": true,
     "detail": "found 10 seeds"
@@ -2216,6 +2201,21 @@
    },
    {
     "check": "C24 bail benign fedavg benign w_adv and I_adv are zero",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail benign fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail benign fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail benign fu_shapley benign w_adv and I_adv are zero",
     "ok": true,
     "detail": ""
    },
@@ -2250,16 +2250,6 @@
     "detail": ""
    },
    {
-    "check": "C24 bail S1 fu_shapley has 10 seeds (42..51)",
-    "ok": true,
-    "detail": "found 10 seeds"
-   },
-   {
-    "check": "C24 bail S1 fu_shapley metrics finite",
-    "ok": true,
-    "detail": ""
-   },
-   {
     "check": "C24 bail S1 fedavg has 10 seeds (42..51)",
     "ok": true,
     "detail": "found 10 seeds"
@@ -2270,57 +2260,22 @@
     "detail": ""
    },
    {
+    "check": "C24 bail S1 fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S1 fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
     "check": "C24 bail S1 guardfed_style has 10 seeds (42..51)",
     "ok": true,
     "detail": "found 10 seeds"
    },
    {
     "check": "C24 bail S1 guardfed_style metrics finite",
-    "ok": true,
-    "detail": ""
-   },
-   {
-    "check": "C24 bail S2 has 4 methods",
-    "ok": true,
-    "detail": "['fedavg', 'fltrust_root', 'fu_shapley', 'guardfed_style']"
-   },
-   {
-    "check": "C24 bail S2 fltrust_root has 10 seeds (42..51)",
-    "ok": true,
-    "detail": "found 10 seeds"
-   },
-   {
-    "check": "C24 bail S2 fltrust_root metrics finite",
-    "ok": true,
-    "detail": ""
-   },
-   {
-    "check": "C24 bail S2 fu_shapley has 10 seeds (42..51)",
-    "ok": true,
-    "detail": "found 10 seeds"
-   },
-   {
-    "check": "C24 bail S2 fu_shapley metrics finite",
-    "ok": true,
-    "detail": ""
-   },
-   {
-    "check": "C24 bail S2 fedavg has 10 seeds (42..51)",
-    "ok": true,
-    "detail": "found 10 seeds"
-   },
-   {
-    "check": "C24 bail S2 fedavg metrics finite",
-    "ok": true,
-    "detail": ""
-   },
-   {
-    "check": "C24 bail S2 guardfed_style has 10 seeds (42..51)",
-    "ok": true,
-    "detail": "found 10 seeds"
-   },
-   {
-    "check": "C24 bail S2 guardfed_style metrics finite",
     "ok": true,
     "detail": ""
    },
@@ -2340,16 +2295,6 @@
     "detail": ""
    },
    {
-    "check": "C24 bail S3 fu_shapley has 10 seeds (42..51)",
-    "ok": true,
-    "detail": "found 10 seeds"
-   },
-   {
-    "check": "C24 bail S3 fu_shapley metrics finite",
-    "ok": true,
-    "detail": ""
-   },
-   {
     "check": "C24 bail S3 fedavg has 10 seeds (42..51)",
     "ok": true,
     "detail": "found 10 seeds"
@@ -2360,12 +2305,67 @@
     "detail": ""
    },
    {
+    "check": "C24 bail S3 fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S3 fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
     "check": "C24 bail S3 guardfed_style has 10 seeds (42..51)",
     "ok": true,
     "detail": "found 10 seeds"
    },
    {
     "check": "C24 bail S3 guardfed_style metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S2 has 4 methods",
+    "ok": true,
+    "detail": "['fedavg', 'fltrust_root', 'fu_shapley', 'guardfed_style']"
+   },
+   {
+    "check": "C24 bail S2 fltrust_root has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S2 fltrust_root metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S2 fedavg has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S2 fedavg metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S2 fu_shapley has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S2 fu_shapley metrics finite",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24 bail S2 guardfed_style has 10 seeds (42..51)",
+    "ok": true,
+    "detail": "found 10 seeds"
+   },
+   {
+    "check": "C24 bail S2 guardfed_style metrics finite",
     "ok": true,
     "detail": ""
    }
@@ -2388,6 +2388,69 @@
     "guardfed_style"
    ],
    "wall_clock_min": 140.4738053085166,
+   "device": {
+    "cuda_available": false,
+    "host": null
+   }
+  }
+ },
+ {
+  "id": "C24r",
+  "verdict": "PASS",
+  "checks": [
+   {
+    "check": "run state == done",
+    "ok": true,
+    "detail": "done"
+   },
+   {
+    "check": "exists: results/campaigns/C24r_s3_fedavg.json",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "sha256 matches status: results/campaigns/C24r_s3_fedavg.json",
+    "ok": true,
+    "detail": "artifact changed after the run"
+   },
+   {
+    "check": "manifests on one commit == run commit: results/campaigns/C24r_s3_fedavg.json",
+    "ok": true,
+    "detail": "['c6a986c4e904b78fc2e1796c50e81c0e7e0ca3be']"
+   },
+   {
+    "check": "no git_dirty manifest: results/campaigns/C24r_s3_fedavg.json",
+    "ok": true,
+    "detail": "0"
+   },
+   {
+    "check": "C24r has 20 runs",
+    "ok": true,
+    "detail": "20"
+   },
+   {
+    "check": "C24r runs are S3 x FedAvg only",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24r covers german and bail x seeds 42..51",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "check": "C24r torch version equals C24's",
+    "ok": true,
+    "detail": "('2.5.1+cu121', '2.5.1+cu121')"
+   },
+   {
+    "check": "C24r adversaries keep a nonzero FedAvg weight",
+    "ok": true,
+    "detail": ""
+   }
+  ],
+  "summary": {
+   "wall_clock_min": 9.31917360460114,
    "device": {
     "cuda_available": false,
     "host": null

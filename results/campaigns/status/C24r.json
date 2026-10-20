@@ -1,0 +1,17 @@
+{
+  "campaign": "C24r",
+  "id": "C24r",
+  "state": "done",
+  "provenance": {
+    "commit": "c6a986c4e904b78fc2e1796c50e81c0e7e0ca3be",
+    "dirty": false
+  },
+  "cuda_available": false,
+  "wall_clock_min": 9.31917360460114,
+  "outputs": {
+    "results/campaigns/C24r_s3_fedavg.json": {
+      "sha256": "8f8791e34d8ba453f35dcd40bf1b6adfe930a60c4bdd7d22a22de05b949406b0",
+      "bytes": 1164598
+    }
+  }
+}
