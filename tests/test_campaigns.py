@@ -87,7 +87,9 @@ def test_c24_methods_other_than_fedavg_ignore_the_sample_count():
         "fu_shapley": dict(g_target=ref, g_task=ref, g_fair=torch.zeros(50), fu_score="cosine",
                            fu_grad_clip=10.0),
         "guardfed_style": dict(g_s=g_s, gs_fair=torch.zeros(4), gs_tau=1.0, gs_gamma=0.0),
+        "guardfed_style_gamma": dict(g_s=g_s, gs_fair=torch.rand(4), gs_tau=1.0, gs_gamma=0.03),
     }
-    for method, kw in cases.items():
-        assert _weights(method, base, **kw) == _weights(method, alt, **kw), method
+    for case, kw in cases.items():
+        method = case.replace("_gamma", "")
+        assert _weights(method, base, **kw) == _weights(method, alt, **kw), case
     assert _weights("fedavg", base) != _weights("fedavg", alt)

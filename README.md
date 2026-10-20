@@ -11,7 +11,7 @@ Code and per-seed results for the article *TrustFedGNN: Auditing and Mitigating 
 
 Every number in the article traces to a file in `results/campaigns/` through [`docs/CLAIMS.md`](docs/CLAIMS.md).
 
-## Quick verification (CPU, no training, about one minute)
+## Quick verification (CPU, no training, a few minutes)
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
@@ -19,8 +19,10 @@ pip install -r requirements.txt
 python -m experiments.campaigns.verify                 # integrity and design checks for every campaign
 python -m experiments.campaigns.analyze_discover_ai    # paired statistics -> results/campaigns/analysis/
 python -m experiments.campaigns.make_tables            # every table of the article -> build/tables/
-pytest -m "not slow"                                   # unit and invariant tests
+pytest -m "not slow"                                   # unit and invariant tests (about 2 minutes)
 ```
+
+The tests download German Credit and Bail into `data/raw/` on first use, so they need network access.
 
 The verifier recomputes each artifact's SHA-256 and compares it with the status file written when the campaign ran. It also checks that every manifest inside the artifact carries one clean commit, and that the design is complete (cells × seeds). `make_tables` fails instead of printing a caption the numbers do not support.
 

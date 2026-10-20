@@ -65,6 +65,22 @@ def c24_active_round_summary(c24: dict) -> Dict:
     return out
 
 
+def c23b_influence(c23b: dict) -> Dict:
+    """Per-seed mean processed influence I_adv over the 20 rounds, FU-Alignment vs root-FLTrust."""
+    out: Dict = {}
+    for ds, res in c23b["results"].items():
+        arms = res["fairness_poison"]
+        per = {a: {r["seed"]: float(np.mean([p["I_adv"] for p in r["per_round"]])) for r in arms[a]["per_seed"]}
+               for a in ("A4_fu_shapley", "R1_fltrust_root")}
+        seeds = sorted(per["A4_fu_shapley"])
+        fu = [per["A4_fu_shapley"][s] for s in seeds]
+        rt = [per["R1_fltrust_root"][s] for s in seeds]
+        out[ds] = {"fu_mean": float(np.mean(fu)), "root_fltrust_mean": float(np.mean(rt)),
+                   "fu_lower_seeds": int(sum(a < b for a, b in zip(fu, rt))), "n": len(seeds),
+                   "wilcoxon_p": wilcoxon_p([a - b for a, b in zip(fu, rt)])}
+    return out
+
+
 C05_RULES = ("fedavg", "krum", "multikrum", "flame", "bfwa", "fu_shapley")
 
 
@@ -162,6 +178,7 @@ def main() -> None:
 
     output["c24_active_rounds"] = c24_active_round_summary(load("C24_adaptive_access.json"))
     output["c05"] = c05_summary(load("C05_adaptive_poisoner.json"))
+    output["c23b_influence"] = c23b_influence(load("C23b_mechanism_subset.json"))
 
     out_path = os.path.join(RESULTS, "analysis", "discover_ai.json")
     os.makedirs(os.path.dirname(out_path), exist_ok=True)

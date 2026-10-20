@@ -289,7 +289,7 @@ def _eval_seed_task(task_args):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Fixed-state replay runner (C20a)")
+    parser = argparse.ArgumentParser(description="Fixed-state report audit runner (C20r)")
     parser.add_argument("--smoke", action="store_true", help="Run 1 seed (42), 2 rounds")
     parser.add_argument("--seeds", type=int, nargs="+", default=None, help="Specific seeds")
     parser.add_argument("--rules", type=str, nargs="+", default=RULES, help="Rules to run")
@@ -303,7 +303,7 @@ def main():
     seeds = [42] if args.smoke else (args.seeds if args.seeds else list(range(42, 72)))
     rounds = 2 if args.smoke else args.rounds
     out_path = args.out_json or ("results/campaigns/smoke/C20_replay_smoke.json" if args.smoke
-                                else "results/campaigns/C20a_fixed_state_replay.json")
+                                else "results/campaigns/C20r_fixed_state_replay.json")
 
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     t0 = time.time()

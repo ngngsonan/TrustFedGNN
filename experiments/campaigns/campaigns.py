@@ -206,7 +206,7 @@ CAMPAIGNS: List[Campaign] = [
              "--smoke", "--workers", "1", "--out-json", f"{SMOKE}/C24_smoke.json"],
         ),
         smoke_outputs=(f"{SMOKE}/C24_smoke.json",),
-        est_minutes="~180 on G14 (8 cores)",
+        est_minutes="~180 on an 8-core Linux CPU",
         feeds="tab_adaptive_access, Table 4",
         notes="Evaluates defence resilience under constrained adversary access schedules (S1, S2, S3) and clean baseline.",
     ),

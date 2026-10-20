@@ -203,6 +203,22 @@
       }
     }
   },
+  "c23b_influence": {
+    "bail": {
+      "fu_lower_seeds": 26,
+      "fu_mean": 0.31900877752709983,
+      "n": 30,
+      "root_fltrust_mean": 1.2747755904930334,
+      "wilcoxon_p": 1.1920928955078125e-06
+    },
+    "german": {
+      "fu_lower_seeds": 29,
+      "fu_mean": 0.40089075292188975,
+      "n": 30,
+      "root_fltrust_mean": 1.1715331356724101,
+      "wilcoxon_p": 9.313225746154785e-09
+    }
+  },
   "c24_active_rounds": {
     "bail": {
       "S1": {

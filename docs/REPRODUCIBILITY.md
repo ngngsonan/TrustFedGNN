@@ -8,9 +8,11 @@ This runbook separates cheap integrity checks, which read the stored artifacts, 
 pip install -r requirements.txt
 python -m experiments.campaigns.verify                 # every campaign that has a status file
 python -m experiments.campaigns.analyze_discover_ai    # results/campaigns/analysis/discover_ai.json
-python -m experiments.campaigns.make_tables --check    # regenerate every table and diff with manuscript/tables
+python -m experiments.campaigns.make_tables            # regenerate every table into build/tables/
 pytest -m "not slow"
 ```
+
+`make_tables --check` additionally diffs the output with `manuscript/tables/`, which exists only once the manuscript sources are released.
 
 `verify` writes `results/campaigns/verification_report.{json,md}`. For each campaign it checks that:
 
