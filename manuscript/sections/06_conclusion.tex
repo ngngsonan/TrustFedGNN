@@ -1,0 +1,8 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+Aggregation rules that weight clients by what they report about themselves can be steered through those reports. A fixed-update audit makes this measurable: with updates and server state held fixed, every report-dependent rule tested shifts weight towards a client that falsifies its report, while rules that read no report produce identical aggregates.
+
+FU-Alignment removes this channel by scoring clipped updates against a reference gradient that the server computes on its own holdout. Under controlled fairness poisoning it gives the adversary less weight and less processed influence than root-update FLTrust on both datasets, with higher AUC, and a factorial ablation traces the advantage to clipping before scoring and to smoothing the signed score before rectification. Under reference evasion it gives the adversaries the lowest weight and influence of the four rules compared and keeps the highest AUC, and on Pokec-z it preserves the predictive utility of FedAvg. Every round leaves a ledger that splits each client's score into utility and fairness parts, so allocation decisions can be audited after the fact.
+
+The adaptive-access study and Section~\ref{sec:discussion} delimit where these results hold. Natural next steps are holdouts drawn from shifted populations, attackers that alternate phases against the score memory, and federations with more clients and intersectional sensitive groups.

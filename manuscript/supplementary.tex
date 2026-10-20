@@ -1,0 +1,57 @@
+\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}
+
+\input{sections/00_preamble.tex}
+
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\theequation}{S\arabic{equation}}
+
+\begin{document}
+
+\title[Supplementary Information: TrustFedGNN]{Supplementary Information (ESM 1) for ``TrustFedGNN: Auditing and Mitigating Report-Dependent Trust in Federated Graph Learning''}
+
+\author[1]{\fnm{Ngoc-Son-An} \sur{Nguyen}}
+\author*[2]{\fnm{Quang-Vinh} \sur{Dang}}
+\author[1]{\fnm{Tuong-Nguyen} \sur{Huynh}}
+\affil[1]{\orgname{Industrial University of Ho Chi Minh City}, \orgaddress{\city{Ho Chi Minh City}, \country{Vietnam}}}
+\affil*[2]{\orgname{British University Vietnam}, \orgaddress{\city{Hung Yen}, \country{Vietnam}}}
+\maketitle
+
+\section{Campaigns, Environments and Comparator Tuning}
+\label{sec:si_campaigns}
+Each study in the main text corresponds to a campaign whose runner, per-seed records, status file and acceptance checks are in the code repository (\url{https://github.com/ngngsonan/TrustFedGNN}): C20r (fixed-update audit), C20b/c (end-to-end audit), C21 (report-privacy diagnostic), C22 (GuardFed-style tuning), C23, C23b and C26 (controlled fairness poisoning, logged replay and $\alpha=0$ run), C24 (adaptive access), C25 (Pokec-z known-label control) and C05 (the supporting sweep of Section~\ref{sec:si_c05}).
+
+All studies run on CPU except the Pokec-z control, which uses one GPU. Within each study every rule shares the same software environment, seeds, partitions and holdout; the repository records the configuration and environment of every run.
+
+\paragraph{GuardFed-style tuning}
+C22 searched the trust-score temperature $\tau$ and selection threshold $\Gamma$ on tuning seeds 1000--1004 and froze the selected values before confirmation: $(\tau,\Gamma)=(1,0.03)$ for German fairness poisoning, $(1,0)$ for Bail fairness poisoning, and $(10,0.001)$ for a Bail stealth design. Tuning used $K=5$, one adversary and 20 rounds. The adaptive-access study (C24, $K=10$, two adversaries, 40 rounds) reuses the two fairness-poisoning selections for all three attack schedules; the stealth selection is not used there. Because the implementation substitutes the graph holdout for synthetic validation data, the comparator is called GuardFed-style rather than a reproduction of GuardFed.
+
+\section{Report-Channel Privacy Analysis}
+\label{sec:si_privacy}
+\input{sections/S2_report_privacy.tex}
+
+\input{tables/supplementary/tab_c21_privacy_diagnostic.tex}
+
+These values quantify the specified single-round diagnostic approximation. They do not establish an intrinsic error rate for every private fairness mechanism, and they do not cover the privacy of client model updates.
+
+\clearpage
+\section{Adaptive-Access Results Averaged over All Rounds}
+\label{sec:si_c24}
+\input{tables/supplementary/tab_c24_access.tex}
+
+The benign rows give each method's utility without an attack. A lower attacked DPD should be read together with the method's benign utility and the attack's measured influence.
+
+\section{Supporting Stealth-Poisoning Sweep}
+\label{sec:si_c05}
+\input{tables/supplementary/tab_c05_stealth.tex}
+
+This sweep uses a different protocol from the main studies (one local epoch, 15 rounds, a distance-evading attacker) and is reported only as supporting evidence that the allocation behaviour of FU-Alignment persists as the share of adversaries grows. Its FLTrust arm uses an earlier gradient reference rather than the root update and is therefore omitted.
+
+\section{Artifact Verification}
+\label{sec:si_verification}
+Every campaign has a status file that records the commit, the command lines and the SHA-256 of each output. The repository verifier checks that each artifact matches its recorded hash, that every manifest inside it carries the same clean commit, and that the design is complete (cells $\times$ seeds), and it recomputes the summary statistics from the per-seed records. All tables in the article and in this document are regenerated from those records by a single script.
+
+\bibliography{ref}
+
+\end{document}

@@ -1,0 +1,87 @@
+\section{Experimental Design and Results}
+\label{sec:experiments}
+
+We organize the evaluation around four questions. RQ1 asks whether changing only a client report changes its aggregation weight. RQ2 asks whether FU-Alignment removes that dependency by construction. RQ3 compares FU-Alignment with a faithful root-update FLTrust control under a matched fairness-poisoning protocol and asks which of its components matter. RQ4 tests where the observed behavior persists or fails under different adversarial access schedules and a corrected label protocol. The studies use different federation sizes and horizons (Table~\ref{tab:protocol}), so numbers are compared only within a study.
+
+\subsection{Experimental Design}
+\label{subsec:setup}
+
+\paragraph{Datasets}
+German Credit (1,000 nodes, 21,742 edges, sensitive attribute gender) and Bail Recidivism (18,876 nodes, 311,870 edges, race) follow the NIFTY preprocessing~\citep{agarwal2021towards}; Pokec-z (67,796 nodes, 617,958 edges, region) follows FairGNN~\citep{dai2021say,takac2012data}. On Pokec-z we evaluate only the 10,262 nodes with an observed label (15.1\%) rather than treating missing labels as negatives. Before partitioning, the server removes its holdout $\Droot$ from the label-stratified validation split: $\min(200, |\mathcal{V}_{\mathrm{val}}|/2)$ nodes, which is 125 nodes on German and 200 on Bail and Pokec-z. The remaining nodes are split across $K$ clients by a Dirichlet label skew with concentration 0.3; edges between clients and edges to the holdout are dropped.
+
+\paragraph{Training}
+Clients train full-batch for three local epochs per round with AdamW (learning rate 0.01, weight decay $10^{-5}$). Except in the two report audits, every method uses the same client stack (Section~\ref{subsec:client_side}): a two-layer GAT with FSER and FTGD. Because the audits test only the aggregation interface, they hold a two-layer GCN client trained with FTGD fixed across all rules; the fixed-update audit uses a 100-node holdout and the end-to-end audit the default holdout above. Report privatisation is enabled only in the Pokec-z control ($\epsilon = 8$) and in the report-privacy diagnostic; elsewhere FTGD uses exact group means. FU-Alignment uses $\alpha = 0.1$, $\beta = 0.9$, and $C = 10$. The factorial cells and the adaptive-access study use a cosine variant of the score, $\cos(\Delta_k^{\mathrm{clip}}, \gtarg)/\norm{\gtarg}_2$, in place of the projection of Eq.~\eqref{eq:score_raw}; in the controlled study its adversarial weight is close to that of the projection score (0.074 versus 0.063 on German, SR+C cell of Table~\ref{tab:c23_factorial}). Because this score is not bounded by $C$, Proposition~\ref{prop:bounded_influence}(ii) does not apply to it directly.
+
+\paragraph{Attacks}
+In \emph{fairness poisoning}, each adversarial client trains on its own data to minimise $\mathcal{L}_{\mathrm{BCE}} - 10\,\widehat{\dpd}_{\mathrm{soft}}$, that is, to increase disparity while keeping some predictive signal, and reports $\widehat{\dpd} = 0$ with near-perfect utility. The fixed-update audit uses the same update but switches only the report between honest and falsified values. The adaptive-access study varies when and how the adversary acts over 40 rounds:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Sustained poisoning:} honest in rounds 0--9, fairness poisoning from round 10 onward.
+    \item \textbf{Intermittent poisoning:} honest in rounds 0--9, then alternating five poisoning rounds and five honest rounds, so that honest phases can rebuild the adversary's score history.
+    \item \textbf{Reference evasion:} from round 1 the adversaries send one crafted update, initialised at the adversary's honest update and optimised for 50 steps to align with the previous global step (a public surrogate of the server reference) while opposing the adversary's own fairness gradient, with a penalty on any norm above five times that of the honest update. The adversary never sees $\Droot$.
+\end{itemize}
+
+\paragraph{Comparators and metrics}
+The audit covers six report-dependent rules (FairFed, $q$-FFL-eq, $F^2$GNN, FedGraph-Fair, PoPETs-FairFed, and BFWA) and four rules that do not read the audited report (CGSV, FLTrust, root-update FLTrust, and FU-Alignment). Root-update FLTrust computes its reference update on the same server holdout as FU-Alignment and is the faithful control in every later study. The adaptive-access study adds FedAvg and a GuardFed-style comparator whose two hyperparameters were selected on separate tuning seeds at $K=5$ with one adversary and then frozen and reused at $K=10$ (Section~S1 of ESM~1); we label it as an adaptation because the holdout and implementation details differ from the original~\citep{li2025guardfed}. We report AUC, DPD, and EOD on the test split; DPD and EOD use hard predictions at a 0.5 threshold. The adversarial weight $w_{\rm adv}$ is the total aggregation weight of the adversarial clients, averaged over rounds (in the adaptive-access study, over the rounds in which the adversaries poison). The processed influence $I_{\rm adv} = \|\sum_{i \in \mathcal{A}} w_i \tilde{\Delta}_i\|_2$, also averaged over rounds, measures how far the adversarial contributions move the model after each rule's own clipping or rescaling $\tilde{\Delta}_i$.
+
+\paragraph{Statistics}
+Seeds are paired within each study: the partition, holdout, and initialisation are identical across rules for a given seed. We report paired mean differences with 95\% bootstrap confidence intervals and two-sided Wilcoxon signed-rank tests, with Holm correction across the eight dataset--metric contrasts against root-update FLTrust and across those of the $\alpha = 0$ comparison; contrasts against FedAvg are reported unadjusted. The Pokec-z control tests non-inferiority against a margin of 0.01 AUC, fixed before the run, using the one-sided 95\% bootstrap lower bound.
+
+\begin{table*}[t]
+\centering
+\scriptsize
+\caption{\textbf{Evaluation protocol.} Each study answers one research question with its own federation size and number of rounds $R$; results are compared only within a study. $K$ is the number of clients and $f$ the number of adversaries. The last column gives the identifier of the corresponding artifact in the code repository.}
+\label{tab:protocol}
+\setlength{\tabcolsep}{3pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllrrll}
+\toprule
+\textbf{Study} & \textbf{RQ} & \textbf{Data} & \textbf{$K$/$f$} & \textbf{$R$} & \textbf{Seeds} & \textbf{Rules} & \textbf{Artifact} \\
+\midrule
+Fixed-update audit & 1, 2 & German & 5 / 1 & 20 & 30 & 10 rules (Table~\ref{tab:c20_report_audit}) & C20r \\
+End-to-end audit & 1 & German, Bail & 5 / 1 & 20 & 30 & root-FLTrust & C20b/c \\
+Controlled fairness poisoning & 3 & German, Bail & 5 / 1 & 20 & 30 & FU-Alignment, root-FLTrust, FedAvg; factorial; $\alpha = 0$ & C23, C23b, C26 \\
+Adaptive access & 4 & German, Bail & 10 / 2 & 40 & 10 & FedAvg, root-FLTrust, FU-Alignment, GuardFed-style & C24 \\
+Known-label control & 4 & Pokec-z & 10 / 0 & 50 & 10 & FedAvg, FU-Alignment & C25 \\
+\bottomrule
+\end{tabular}}
+\end{table*}
+
+\subsection{RQ1: Does Falsified Telemetry Change Trust Allocation?}
+\label{subsec:rq1_audit}
+
+The fixed-update audit replays the same client updates, server state and server reference twice and changes only the adversary's report. Report-dependent rules receive the lie that best serves the adversary under each rule; the report-free rules receive a report in which every field except the sample count is falsified. This design tests the aggregation interface rather than the success of a jointly trained attack.
+
+\input{tables/tab_c20_report_audit}
+
+Every audited report-dependent rule responds in at least 25 of 30 seeds, whereas CGSV, both FLTrust variants, and FU-Alignment do not respond in any seed: their weights and their aggregate are bit-identical under the honest and the falsified report (Table~\ref{tab:c20_report_audit}). The magnitude varies sharply across rules; the mean adversarial-weight change is 0.908 for $F^2$GNN, 0.650 for BFWA, and 0.305 for $q$-FFL-eq. These values measure an input dependency of the evaluated implementations.
+
+An end-to-end audit, in which the adversary trains jointly with the federation and falsifies its report in every round, confirms the invariance for root-update FLTrust: its mean adversarial weight is the same with and without the lie (0.143 on German, 0.129 on Bail). A separate diagnostic of privatised reports, confined to the scalar report channel and BFWA's decision, is in Section~S2 of ESM~1.
+
+\subsection{RQ2--RQ3: Report Independence and Controlled Efficacy}
+\label{subsec:rq2_rq3_efficacy}
+
+FU-Alignment never reads the audited client telemetry, so the fixed-update audit verifies report independence for the implemented aggregation path. The controlled study then asks a different question: how does that path behave under matched fairness poisoning when compared with root-update FLTrust?
+
+\input{tables/tab_c23_controlled}
+
+FU-Alignment assigns lower mean adversarial weight than root-update FLTrust on both datasets: 0.0630 versus 0.1892 on German (lower in 29 of 30 paired seeds) and 0.0451 versus 0.1959 on Bail (27 of 30) (Table~\ref{tab:c23_controlled}). It also has higher AUC on both datasets (+0.021 and +0.024). With Holm correction across the eight dataset--metric contrasts, both allocation reductions, both AUC gains, and the German EOD reduction remain significant; the DPD contrasts and the Bail EOD contrast do not. Against FedAvg in the same runs, FU-Alignment lowers adversarial weight, DPD, and EOD on both datasets, at the cost of 0.015 AUC on Bail. A logged replay reproduces these runs bit for bit and records per-round weights, scores, and $I_{\rm adv}$; FU-Alignment's mean processed influence is 0.401 against 1.172 for root-update FLTrust on German (lower in 29 of 30 seeds) and 0.319 against 1.275 on Bail (26 of 30).
+
+\input{tables/tab_c23_factorial}
+
+\paragraph{Which components produce the reduction}
+Both methods use server data, so the empirical question is which of FU-Alignment's departures from FLTrust matter. A $2 \times 2$ factorial within the same protocol, using the cosine score in all four cells, varies the order of smoothing and rectification and the treatment of update magnitude (Table~\ref{tab:c23_factorial}). Rectifying before smoothing raises adversarial weight by 0.035 on German and 0.024 on Bail, and rescaling updates to a common norm instead of clipping raises it by 0.077 and 0.027; all four paired confidence intervals exclude zero. Signed smoothing and clipping therefore both contribute. A paired run with the fairness term removed ($\alpha = 0$, all else equal) isolates the reference itself: at $\alpha = 0.1$ the fairness term lowers German adversarial weight by only 0.003 (Holm-adjusted $p = 0.011$) and changes no other endpoint detectably on either dataset. The reduction relative to root-update FLTrust is therefore attributable to how updates are processed and scored over time, not to the fairness direction at this weight.
+
+\subsection{RQ4: Adaptive-Access and Label-Protocol Boundaries}
+\label{subsec:rq4_boundary}
+
+The adaptive-access study contains 320 runs over German and Bail, four methods, three attack schedules plus benign controls, and 10 paired seeds. Table~\ref{tab:c24_boundary} reports weight and influence over the rounds in which the adversaries poison; Section~S3 of ESM~1 gives all-round means.
+
+Reference evasion, the attack with the most knowledge of the server rule, is the most damaging one for FedAvg: its AUC falls to 0.590 on both datasets, against 0.661 and 0.749 in its benign runs. FU-Alignment gives the adversaries the lowest weight and influence of the four methods on both datasets (0.034 and 0.266 on German, 0.033 and 0.233 on Bail; root-update FLTrust 0.169 and 1.054, and 0.137 and 0.898) and keeps the highest attacked AUC (0.641 on German, 0.709 on Bail). On Bail, FU-Alignment also has the lowest processed influence under sustained and intermittent poisoning; under intermittent poisoning the GuardFed-style adaptation assigns slightly less weight (0.119 versus 0.128) but more influence (1.543 versus 0.660). On German, the GuardFed-style adaptation has the lowest weight and influence under both poisoning schedules.
+
+The boundary is intermittent poisoning on German. There FU-Alignment gives the adversaries more weight and influence (0.210 and 1.237) than FedAvg (0.202 and 1.167) and root-update FLTrust (0.197 and 1.122), whereas under sustained poisoning its weight on the same dataset is 0.126. Each honest phase lets the adversaries rebuild a positive smoothed score that they then spend while poisoning; temporal memory, which removes a persistent opponent, can preserve the influence of one that alternates. The adaptive-access study therefore maps where the advantage holds and where it does not.
+
+\input{tables/tab_c24_boundary}
+
+\input{tables/tab_c25_known_labels}
+
+The known-label control tests benign utility under the corrected Pokec-z known-label protocol. FU-Alignment's paired AUC difference from FedAvg is $+0.002409$; the one-sided 95\% bootstrap lower bound is $-0.002060$, above the prespecified $-0.01$ margin. FU-Alignment therefore preserves predictive utility on Pokec-z; its DPD and EOD differences from FedAvg are not significant (Table~\ref{tab:c25_known_labels}).

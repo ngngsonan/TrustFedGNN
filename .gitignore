@@ -259,5 +259,3 @@ results/campaigns/*_checkpoint.json
 .codebase-memory/
 .playwright-mcp/
 
-# Manuscript sources: versioned on the local branch `manuscript`, not pushed with main.
-/manuscript/

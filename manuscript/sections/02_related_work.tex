@@ -1,0 +1,41 @@
+%% sections/02_related_work.tex
+\section{Related Work and Setting}
+\label{sec:related_work}
+
+We review fairness-aware federated graph learning (Section~\ref{subsec:rw_fairfl}), privacy limitations of reported fairness statistics (Section~\ref{subsec:rw_privacy}), Byzantine-robust aggregation and server-anchored trust (Section~\ref{subsec:rw_robust}), client contribution evaluation (Section~\ref{subsec:rw_contribution}), and the architectural relation to prior work (Section~\ref{subsec:rw_prior_work}).
+
+\subsection{Fairness in Federated Graph Learning}
+\label{subsec:rw_fairfl}
+
+Graph neural networks~\citep{kipf2016semi, velickovic2017graph} trained under federated protocols~\citep{mcmahan2017communication, kairouz2021advances} enable collaborative inference over distributed subgraphs without pooling raw adjacency or feature matrices. Two principal paradigms address group fairness in this setting.
+
+The first paradigm operates within client-side local training while leaving the global aggregation mechanism unmodified. FairGNN~\citep{dai2021say} employs adversarial training to purge sensitive demographic attributes from node representations, and FairSIN~\citep{yang2024fairsin} neutralizes sensitive signals in feature space. Related methods rebalance graph topologies~\citep{li2024fairgb}, learn invariant representations~\citep{zhu2024fairinv}, debias input structures~\citep{dong2022edits}, optimize fair contrastive objectives~\citep{agarwal2021towards}, or disentangle sensitive latent factors~\citep{lee2025dabgnn, fnrgnn2025}. In vertical federations, FAVGNN~\citep{wang2026favgnn} addresses feature-split graphs. Because client-side debiasing mechanisms execute locally, they provide no systemic defense if a participating client deliberately manipulates its training objective or falsifies its exported outputs.
+
+The second paradigm intervenes at the aggregation stage, typically by weighting client updates according to self-reported scalars. FairFed~\citep{ezzeldin2023fairfed} and FairGFL~\citep{zhou2026fairgfl} reweight clients based on the gap between local reported fairness and global estimates; $F^2$GNN~\citep{f2gnn2023} and FedGraph-Fair~\citep{khan2026fedgraphfair} compute aggregation weights from reported graph-aware disparities or empirical loss values; PUFFLE~\citep{corbucci2024puffle} adapts client weights toward a target disparity; FedFACT~\citep{fedfact2025} calibrates demographic trade-offs; $q$-FedAvg~\citep{li2020fair} powers client weights by reported empirical losses; and BFWA~\citep{dang2026fedfairgnn} adjusts client weights via bilevel optimization against reported disparity and utility metrics. PoPETs-FairFed~\citep{bendoukha2025popets} dampens FairFed weights polynomially but still consumes reported local disparity values. Across these rules, the aggregation surface depends critically on client-reported scalar metadata that the server cannot directly verify.
+
+\subsection{Privacy of Reported Fairness Statistics}
+\label{subsec:rw_privacy}
+
+Local differential privacy (LDP)~\citep{dwork2014algorithmic, mironov2017renyi} is commonly considered to preserve client confidentiality when transmitting scalar statistics, and FedFDP~\citep{ling2024feddp} combines LDP with distributed fairness coordination. An extensive literature identifies fundamental trade-offs between differential privacy and algorithmic fairness, showing that private noise injection frequently degrades performance on demographic minority groups~\citep{bagdasaryan2019differential, cummings2019compatibility, tran2021dperm, fioretto2022survey}. Cryptographic coordination, such as the homomorphic aggregation in PoPETs-FairFed~\citep{bendoukha2025popets}, protects intermediate values in transit but does not attest to the truthfulness of local client computations. While prior studies investigate the fairness impact of private model training, our focus centers on the verification bottleneck: whether a central server can reliably enforce or audit fairness constraints when client reports are privatized under LDP.
+
+\subsection{Byzantine-Robust and Server-Anchored Aggregation}
+\label{subsec:rw_robust}
+
+Classical Byzantine-robust aggregation mechanisms evaluate mutual distances among client updates in parameter space without requiring auxiliary server data. These include coordinate-wise median and trimmed mean~\citep{yin2018byzantine}, Krum and Multi-Krum~\citep{blanchard2017krum}, Bulyan~\citep{mhamdi2018hidden}, FoolsGold~\citep{fung2018mitigating}, and FLAME~\citep{nguyen2022flame}. While effective against arbitrary unconstrained updates, distance-based filters remain blind to adversaries whose poisoned updates remain within the geometric spread of benign clients~\citep{eabfl2024, kasyap2025attack}.
+
+A distinct lineage anchors aggregation against external reference directions. We examine three primary counterparts to delineate the novelty of FU-Alignment:
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{CGSV}~\citep{xu2021gradient}: Gradient-driven rewards value uploaded gradients without an auxiliary dataset, using cosine-based contribution scores within the collaborative aggregation process. Its reference is therefore derived from participant updates. FU-Alignment instead scores against gradients computed on a server-held graph. We treat this as a difference in reference provenance, not as evidence that CGSV is generally insecure.
+    \item \textbf{FLTrust}~\citep{cao2021fltrust}: FLTrust bootstraps trust from a server update computed on clean root data. It uses rectified cosine scores and normalizes client updates to the root-update norm, which limits update magnitude. FU-Alignment shares the server-anchoring principle but uses separate task and fairness gradients, cap-at-$C$ clipping, projection scores, and signed temporal smoothing. A factorial ablation (Section~\ref{subsec:rq2_rq3_efficacy}) attributes the measured difference to clipping and signed smoothing rather than to the fairness gradient.
+    \item \textbf{GuardFed}~\citep{li2025guardfed}: GuardFed maintains a fairness-aware reference model and evaluates client models using server-held clean or synthetic validation data. FU-Alignment instead uses first-order projections of clipped updates onto server-computed gradients and carries signed scores across rounds. Our experiments use a project-specific GuardFed-style adaptation, clearly labeled because it is not a reproduction of the original data and validation pipeline.
+\end{enumerate}
+
+\subsection{Evaluating Client Contributions}
+\label{subsec:rw_contribution}
+
+Shapley-value formulations quantify client value by computing average marginal improvements across client coalitions~\citep{shapley1953value, liu2022gtg, tastan2024redefining}. Exact computation requires evaluating $2^K$ model coalitions, and Monte Carlo approximations incur multiple evaluation passes per round. The score ledger in FU-Alignment provides an exact, first-order linear decomposition of per-round scores into utility and fairness components in $O(KP)$ time, offering inspectable auditability without claiming to approximate exponential cooperative-game Shapley values.
+
+\subsection{Relation to Prior Work}
+\label{subsec:rw_prior_work}
+
+This work addresses the auditability and defense of aggregation rules in federated graph learning under report manipulation. FedFairGNN~\citep{dang2026fedfairgnn} introduced bilevel Frank--Wolfe optimization (BFWA) driven by reported client telemetry, paired with local client debiasing via fairness-sensitive edge reweighting (FSER) and fair targeted gradient descent (FTGD) on three-client fraud graphs. Here, BFWA is treated as an audited prior method. To isolate the server-side aggregation mechanism, our comparative evaluations adapt the FSER and FTGD client-side training mechanisms as a fixed local stack across all evaluated aggregation rules. These client-side components are held fixed and are not claimed as contributions of this study. The report-surface audit, scoped report-channel privacy analysis, FU-Alignment server rule, and adaptive-access evaluation constitute the contributions of this article.

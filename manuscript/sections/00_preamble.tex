@@ -1,0 +1,66 @@
+\usepackage{amsmath,amssymb,amsfonts,bm}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{enumitem}
+\usepackage{float}
+\providecommand{\FloatBarrier}{\relax}
+\usepackage{url}
+\usepackage{hyperref}
+
+%% Relaxed Float Placement Parameters (Prevents Float Drift / Queue Congestion)
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.80}
+\setcounter{topnumber}{5}
+\setcounter{bottomnumber}{4}
+\setcounter{totalnumber}{8}
+
+%% Theorem Environments (using sn-jnl predefined styles)
+\theoremstyle{thmstyleone}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{thmstylethree}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+
+
+%% Math Operators and Notations
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\Simplex}{Simplex}
+\DeclareMathOperator{\EMA}{EMA}
+\DeclareMathOperator{\ReLU}{ReLU}
+\DeclareMathOperator{\Cosine}{Cos}
+\DeclareMathOperator{\clip}{clip}
+
+%% Metric and Symbol Macros
+\newcommand{\MethodName}{FU-Alignment}
+\newcommand{\MethodVariantFull}{FU-Alignment (full)}
+\newcommand{\dpd}{\mathrm{DPD}}
+\newcommand{\dpdhard}{\mathrm{DPD}_{\mathrm{hard}}}
+\newcommand{\eod}{\mathrm{EOD}}
+\newcommand{\wadv}{w_{\mathrm{adv}}}
+\newcommand{\OmegaW}{\Omega_w}
+\newcommand{\Rstar}{\mathcal{R}^*}
+\newcommand{\Droot}{D_{\mathrm{root}}}
+\newcommand{\gtarg}{g_{\mathrm{target}}}
+\newcommand{\gtask}{g_{\mathrm{task}}}
+\newcommand{\gfair}{g_{\mathrm{fair}}}
+\newcommand{\ip}[2]{\langle #1, #2 \rangle}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\RR}{\mathbb{R}}
+
+% Allow extra inter-word stretch before a line overflows the margin
+\setlength{\emergencystretch}{2em}
